@@ -1,0 +1,10 @@
+{
+  "name": "all-seasons-locksmith-pa",
+  "private": true,
+  "scripts": {
+    "dev": "npx --yes live-server --port=53127 --no-browser"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}

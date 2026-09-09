@@ -7,6 +7,24 @@ this repo is exactly what the server sends.
 
 ---
 
+## Local development
+
+No build step is needed — any static file server works. To get live reload
+on file changes, run:
+
+```sh
+npm run dev
+```
+
+Then open `http://localhost:53127/`. Edit any HTML/CSS/JS file and the
+browser refreshes automatically.
+
+`npm run dev` runs `live-server --port=53127 --no-browser` (see
+`package.json`). No install step is required — `npx` fetches `live-server` on
+first run. Pick a different port there if 53127 is ever in use.
+
+---
+
 ## Contents
 
     index.html            homepage
