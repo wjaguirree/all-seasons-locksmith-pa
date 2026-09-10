@@ -114,6 +114,9 @@
 #   RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 # </IfModule>
 
+# ----- Custom 404 page -----
+ErrorDocument 404 /404.html
+
 # ----- Pretty URLs: serve "/about" as "/about.html" (uncomment if multi-page) -----
 # <IfModule mod_rewrite.c>
 #   RewriteEngine On
