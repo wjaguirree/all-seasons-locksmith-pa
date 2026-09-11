@@ -88,6 +88,8 @@ h1, h2, h3, h4 {
   letter-spacing: -0.02em;
   text-wrap: balance;
 }
+.blog-body p { margin-bottom: 1em; }
+.blog-body h1, .blog-body h2, .blog-body h3, .blog-body h4, .blog-body h5, .blog-body h6 { margin-bottom: 0.75em; }
 ::selection { background: var(--brass); color: var(--bg); }
 
 :focus-visible {
@@ -1331,5 +1333,5 @@ html.menu-open { overflow: hidden; }
      the leftover photo run the full width instead, in the same 3:4 frame:
      a wider crop threw away up to 58% of the taller phone photos. The contact
      sheet is exempt: a giant tile in the middle of it would look broken. */
-  .work-grid:not(.work-grid--wall) > .work-item:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .work-grid:not(.work-grid--wall) > .work-item:last-child:nth-child(odd) { grid-column: 1 / -1; }
 }
