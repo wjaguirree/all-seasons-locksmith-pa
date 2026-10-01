@@ -2,7 +2,7 @@
 //   node tools/schema-fix.mjs            (dry run, prints counts, writes nothing)
 //   node tools/schema-fix.mjs --apply    (writes changed files)
 // Every block is parsed before and after a fix. Any parse error aborts with exit 1.
-import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { readdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -12,9 +12,42 @@ const SKIP = new Set(['lib', 'node_modules', '.git', 'tools', 'assets']);
 const BLOCK_RE = /(<script type="application\/ld\+json">)([\s\S]*?)(<\/script>)/g;
 export const BUSINESS_ID = 'https://allseasonslocksmith.com/#business';
 
+// Width and height of a .webp file, read from its header (VP8, VP8L, VP8X).
+function webpSize(file) {
+  const b = readFileSync(file);
+  if (b.toString('ascii', 0, 4) !== 'RIFF' || b.toString('ascii', 8, 12) !== 'WEBP') throw new Error(`not a webp: ${file}`);
+  const kind = b.toString('ascii', 12, 16);
+  if (kind === 'VP8X') return { width: 1 + b.readUIntLE(24, 3), height: 1 + b.readUIntLE(27, 3) };
+  if (kind === 'VP8L') {
+    const v = b.readUInt32LE(21);
+    return { width: 1 + (v & 0x3fff), height: 1 + ((v >> 14) & 0x3fff) };
+  }
+  if (kind === 'VP8 ') return { width: b.readUInt16LE(26) & 0x3fff, height: b.readUInt16LE(28) & 0x3fff };
+  throw new Error(`unknown webp chunk ${kind}: ${file}`);
+}
+
 // Each fix: { id, label, apply(data, ctx) -> true if it changed data }.
 // ctx = { rel } (file path relative to site root). Fixes mutate data in place.
 export const FIXES = [
+  {
+    id: 'blog-image-object',
+    label: 'BlogPosting image string -> ImageObject',
+    apply(data) {
+      let changed = false;
+      for (const n of nodes(data)) {
+        if (n['@type'] !== 'BlogPosting' || typeof n.image !== 'string') continue;
+        const url = new URL(n.image);
+        const file = join(root, decodeURIComponent(url.pathname));
+        if (!existsSync(file)) {
+          console.error(`blog-image-object: image file not found: ${file}`);
+          process.exit(1);
+        }
+        n.image = { '@type': 'ImageObject', url: n.image, ...webpSize(file) };
+        changed = true;
+      }
+      return changed;
+    },
+  },
   {
     id: 'service-provider-ref',
     label: 'Service.provider -> bare #business reference',
@@ -64,6 +97,52 @@ export const FIXES = [
   },
 ];
 
+// Page-level fixes can add whole blocks. apply(html, ctx) -> new html, or null if no change.
+export const PAGE_FIXES = [
+  {
+    id: 'blog-breadcrumb',
+    label: 'blog post and index BreadcrumbList',
+    apply(html, { rel }) {
+      const isIndex = rel === 'blog/index.html';
+      if (!isIndex && !/^blog\/[^/]+\/index\.html$/.test(rel)) return null;
+      if (hasType(html, 'BreadcrumbList')) return null;
+      const home = { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://allseasonslocksmith.com/' };
+      const blog = { '@type': 'ListItem', position: 2, name: 'Blog' };
+      let items;
+      if (isIndex) {
+        items = [home, blog];
+      } else {
+        const h1 = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+        if (!h1) {
+          console.error(`blog-breadcrumb: missing h1 in ${rel}`);
+          process.exit(1);
+        }
+        items = [home, { ...blog, item: 'https://allseasonslocksmith.com/blog/' }, { '@type': 'ListItem', position: 3, name: h1 }];
+      }
+      return insertBlock(html, { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items });
+    },
+  },
+];
+
+function hasType(html, type) {
+  for (const m of html.matchAll(BLOCK_RE)) if (JSON.parse(m[2])['@type'] === type) return true;
+  return false;
+}
+
+// Pretty block (matches the blog pages' style), placed after the last JSON-LD block, else before </head>.
+function insertBlock(html, data) {
+  const block = `<script type="application/ld+json">\n${JSON.stringify(data, null, 2)}\n</script>\n`;
+  const ends = [...html.matchAll(BLOCK_RE)];
+  if (ends.length) {
+    const last = ends[ends.length - 1];
+    const at = last.index + last[0].length;
+    return html.slice(0, at) + '\n' + block.trimEnd() + html.slice(at);
+  }
+  const head = html.indexOf('</head>');
+  if (head === -1) throw new Error('no </head>');
+  return html.slice(0, head) + block + html.slice(head);
+}
+
 function* walk(dir) {
   for (const e of readdirSync(dir, { withFileTypes: true })) {
     if (e.isDirectory()) {
@@ -98,14 +177,14 @@ function parse(text, where) {
   }
 }
 
-const counts = Object.fromEntries(FIXES.map((f) => [f.id, new Set()]));
+const counts = Object.fromEntries([...FIXES, ...PAGE_FIXES].map((f) => [f.id, new Set()]));
 const changedFiles = new Set();
 
 for (const file of walk(root)) {
   const rel = file.slice(root.length + 1);
   const html = readFileSync(file, 'utf8');
   let fileChanged = false;
-  const out = html.replace(BLOCK_RE, (whole, open, body, close) => {
+  let out = html.replace(BLOCK_RE, (whole, open, body, close) => {
     const data = parse(body, rel);
     let blockChanged = false;
     for (const fix of FIXES) {
@@ -120,6 +199,15 @@ for (const file of walk(root)) {
     fileChanged = true;
     return open + next + close;
   });
+  for (const fix of PAGE_FIXES) {
+    const next = fix.apply(out, { rel });
+    if (next !== null && next !== out) {
+      for (const m of next.matchAll(BLOCK_RE)) parse(m[2], `${rel} (after ${fix.id})`);
+      out = next;
+      counts[fix.id].add(rel);
+      fileChanged = true;
+    }
+  }
   if (fileChanged) {
     changedFiles.add(rel);
     if (APPLY) writeFileSync(file, out);
@@ -128,5 +216,5 @@ for (const file of walk(root)) {
 
 console.log(APPLY ? 'MODE: apply' : 'MODE: dry run (no files written)');
 if (!FIXES.length) console.log('No fixes registered.');
-for (const f of FIXES) console.log(`${f.id} (${f.label}): ${counts[f.id].size} files`);
+for (const f of [...FIXES, ...PAGE_FIXES]) console.log(`${f.id} (${f.label}): ${counts[f.id].size} files`);
 console.log(`Total files ${APPLY ? 'changed' : 'that would change'}: ${changedFiles.size}`);
