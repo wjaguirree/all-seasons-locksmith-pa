@@ -14,7 +14,55 @@ export const BUSINESS_ID = 'https://allseasonslocksmith.com/#business';
 
 // Each fix: { id, label, apply(data, ctx) -> true if it changed data }.
 // ctx = { rel } (file path relative to site root). Fixes mutate data in place.
-export const FIXES = [];
+export const FIXES = [
+  {
+    id: 'service-provider-ref',
+    label: 'Service.provider -> bare #business reference',
+    apply(data) {
+      let changed = false;
+      for (const n of nodes(data)) {
+        const p = n['@type'] === 'Service' ? n.provider : null;
+        if (p && p['@id'] === BUSINESS_ID && Object.keys(p).length > 1) {
+          n.provider = { '@id': BUSINESS_ID };
+          changed = true;
+        }
+      }
+      return changed;
+    },
+  },
+  {
+    id: 'entity-type',
+    label: '#business @type -> Locksmith',
+    apply(data) {
+      let changed = false;
+      for (const n of nodes(data)) {
+        if (n['@id'] === BUSINESS_ID && '@type' in n && n['@type'] !== 'Locksmith') {
+          n['@type'] = 'Locksmith';
+          changed = true;
+        }
+      }
+      return changed;
+    },
+  },
+  {
+    id: 'entity-name',
+    label: '#business name -> All Seasons Locksmith',
+    apply(data) {
+      let changed = false;
+      for (const n of nodes(data)) {
+        if (
+          n['@id'] === BUSINESS_ID &&
+          typeof n.name === 'string' &&
+          n.name !== 'All Seasons Locksmith'
+        ) {
+          n.name = 'All Seasons Locksmith';
+          changed = true;
+        }
+      }
+      return changed;
+    },
+  },
+];
 
 function* walk(dir) {
   for (const e of readdirSync(dir, { withFileTypes: true })) {
