@@ -118,13 +118,32 @@ All current pages are verified clean against all five.
 
 Open items carried forward:
 
-- **sameAs** — needs the Google Business Profile URL and social profile URLs
+- **sameAs** — homepage lists 7 claimed profiles (Thumbtack, Bark, Alignable,
+  Brownbook, Hotfrog, Cylex, Medium). Still needs the Google Business Profile
+  URL and social profiles once they exist. Add new ones to `SAME_AS` in
+  `tools/schema-fix.mjs` and run it with `--apply`.
 - **Blog** — 3 posts against 1,034 service pages is thin
 - **aggregateRating** — hold off until review volume supports it; publishing
   star ratings without real reviews is schema fraud and draws manual actions
 - **HSTS preload** — deliberately not enabled, owner's decision
 
 Per-page FAQ is already present: 5–9 unique Q&A per page, schema-backed.
+
+### Schema rules for new pages
+
+- **Business entity:** every page refers to `https://allseasonslocksmith.com/#business`.
+  Type is `Locksmith`, name is exactly `All Seasons Locksmith` (never add the
+  city to the name). Service pages use a bare `{"@id": ".../#business"}` as
+  `provider`. Service-area pages add a `WebPage` block naming the city in
+  `spatialCoverage`.
+- **Blog posts must include:**
+  - a `BreadcrumbList` (Home > Blog > post title, last item has no `item` link)
+  - a `BlogPosting` whose `image` is an `ImageObject` with `url`, `width` and
+    `height` (read the real size from the hero WebP)
+- **Hours:** Sunday to Thursday 07:00 to 22:00, Friday 07:00 to 18:00. Saturday
+  is closed, so leave it out. Never add a `00:00` entry.
+- **Tools:** `node tools/schema-check.mjs` checks counts and JSON validity.
+  `node tools/schema-fix.mjs` is a dry run, add `--apply` to write.
 
 ---
 
