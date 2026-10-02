@@ -34,7 +34,7 @@ export const SAME_AS = [
   'https://www.bark.com/en/us/company/all-seasons-locksmith/j89qMR/',
   'https://www.alignable.com/harrisburg-pa/all-seasons-locksmith',
   'https://www.brownbook.net/business/55400588/all-seasons-locksmith',
-  'https://www.hotfrog.com/company/86bb8995b5290e2719aa5c500f7ec524/all-seasons-locksmith/harrisburg/locksmiths',
+  'https://www.hotfrog.com/company/AIMMooAteaib2WeTOAy-Ww/all-seasons-locksmith/harrisburg/locksmiths',
   'https://www.cylex.us.com/company/all-seasons-locksmith-llc-40707120.html',
   'https://medium.com/@allseasonslocksmith',
 ];
