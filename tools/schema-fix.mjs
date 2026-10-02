@@ -143,7 +143,42 @@ export const FIXES = [
 ];
 
 // Page-level fixes can add whole blocks. apply(html, ctx) -> new html, or null if no change.
+const unescapeHtml = (t) =>
+  t.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+
 export const PAGE_FIXES = [
+  {
+    id: 'city-webpage',
+    label: 'service-area city WebPage block',
+    apply(html, { rel }) {
+      if (!/^service-areas\/[^/]+\/index\.html$/.test(rel)) return null;
+      if (hasType(html, 'WebPage')) return null;
+      const url = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+      const title = html.match(/<title>([\s\S]*?)<\/title>/)?.[1];
+      let city = null;
+      for (const m of html.matchAll(BLOCK_RE)) {
+        const d = JSON.parse(m[2]);
+        if (d['@id'] === BUSINESS_ID && typeof d.areaServed === 'string') city = d.areaServed;
+      }
+      if (!url || !title || !city) {
+        console.error(`city-webpage: missing canonical, title or city areaServed in ${rel}`);
+        process.exit(1);
+      }
+      return insertBlock(
+        html,
+        {
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          '@id': `${url}#webpage`,
+          url,
+          name: unescapeHtml(title).trim(),
+          about: { '@id': BUSINESS_ID },
+          spatialCoverage: { '@type': 'Place', name: city },
+        },
+        { pretty: false },
+      );
+    },
+  },
   {
     id: 'blog-breadcrumb',
     label: 'blog post and index BreadcrumbList',
@@ -175,8 +210,9 @@ function hasType(html, type) {
 }
 
 // Pretty block (matches the blog pages' style), placed after the last JSON-LD block, else before </head>.
-function insertBlock(html, data) {
-  const block = `<script type="application/ld+json">\n${JSON.stringify(data, null, 2)}\n</script>\n`;
+function insertBlock(html, data, { pretty = true } = {}) {
+  const body = pretty ? `\n${JSON.stringify(data, null, 2)}\n` : JSON.stringify(data);
+  const block = `<script type="application/ld+json">${body}</script>\n`;
   const ends = [...html.matchAll(BLOCK_RE)];
   if (ends.length) {
     const last = ends[ends.length - 1];
