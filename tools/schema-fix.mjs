@@ -28,7 +28,52 @@ function webpSize(file) {
 
 // Each fix: { id, label, apply(data, ctx) -> true if it changed data }.
 // ctx = { rel } (file path relative to site root). Fixes mutate data in place.
+// Claimed, live profiles (source: knowledge/tracking links logs). Extend as more citations are claimed.
+export const SAME_AS = [
+  'https://www.thumbtack.com/pa/harrisburg/pro/all-seasons-locksmith/service/588811581116137477',
+  'https://www.bark.com/en/us/company/all-seasons-locksmith/j89qMR/',
+  'https://www.alignable.com/harrisburg-pa/all-seasons-locksmith',
+  'https://www.brownbook.net/business/55400588/all-seasons-locksmith',
+  'https://www.hotfrog.com/company/86bb8995b5290e2719aa5c500f7ec524/all-seasons-locksmith/harrisburg/locksmiths',
+  'https://www.cylex.us.com/company/all-seasons-locksmith-llc-40707120.html',
+  'https://medium.com/@allseasonslocksmith',
+];
+
 export const FIXES = [
+  {
+    id: 'drop-saturday-zero-hours',
+    label: 'remove Saturday 00:00-00:00 entry (closed = omitted)',
+    apply(data) {
+      let changed = false;
+      for (const n of nodes(data)) {
+        const spec = n.openingHoursSpecification;
+        if (!Array.isArray(spec)) continue;
+        const keep = spec.filter((h) => !(h.opens === '00:00' && h.closes === '00:00'));
+        if (keep.length !== spec.length) {
+          n.openingHoursSpecification = keep;
+          changed = true;
+        }
+      }
+      return changed;
+    },
+  },
+  {
+    id: 'homepage-sameas',
+    label: 'homepage business sameAs list',
+    apply(data, { rel }) {
+      if (rel !== 'index.html') return false;
+      let changed = false;
+      for (const n of nodes(data)) {
+        if (n['@id'] === BUSINESS_ID && n['@type'] === 'Locksmith' && n.address) {
+          if (JSON.stringify(n.sameAs) !== JSON.stringify(SAME_AS)) {
+            n.sameAs = [...SAME_AS];
+            changed = true;
+          }
+        }
+      }
+      return changed;
+    },
+  },
   {
     id: 'blog-image-object',
     label: 'BlogPosting image string -> ImageObject',
