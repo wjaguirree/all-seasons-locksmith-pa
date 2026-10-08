@@ -104,12 +104,6 @@
     // year
     var y = $("[data-year]");
     if (y) y.textContent = String(new Date().getFullYear());
-
-    // document title / meta could be updated per town if desired
-    if (BRAND.region) {
-      document.title = BRAND.name + " — " + BRAND.region +
-        " | Car, Home, Business & Emergency Locksmith";
-    }
   }
 
   /* ---------- reveals — bulletproof: IntersectionObserver PLUS a scroll
