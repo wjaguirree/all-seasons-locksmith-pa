@@ -140,7 +140,7 @@ Per-page FAQ is already present: 5–9 unique Q&A per page, schema-backed.
   - a `BreadcrumbList` (Home > Blog > post title, last item has no `item` link)
   - a `BlogPosting` whose `image` is an `ImageObject` with `url`, `width` and
     `height` (read the real size from the hero WebP)
-- **Hours:** Sunday to Thursday 07:00 to 22:00, Friday 07:00 to 18:00. Saturday
+- **Hours:** Sunday to Thursday 07:00 to 22:00, Friday 07:00 to 15:45. Saturday
   is closed, so leave it out. Never add a `00:00` entry.
 - **Tools:** `node tools/schema-check.mjs` checks counts and JSON validity.
   `node tools/schema-fix.mjs` is a dry run, add `--apply` to write.
