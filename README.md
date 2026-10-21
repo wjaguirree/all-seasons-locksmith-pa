@@ -90,7 +90,7 @@ Every page carries JSON-LD. Removing it costs rich results and AI citations:
 
 ### 4. Tracking tags in `<head>` on all 1,034 pages
 
-- Google Analytics 4 — `G-JRGPYGJLYK`
+- Google Analytics 4 — `G-JRGPYGJLYK` (only loads when `location.hostname` is `allseasonslocksmith.com`, so local dev visits stay out of GA4)
 - Microsoft Clarity — `y1roxb7hwa`
 
 ---
