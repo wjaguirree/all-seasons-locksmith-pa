@@ -106,7 +106,8 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Roboto+Slab:wght@600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Roboto+Slab:wght@600;700&display=swap" /></noscript>
 
-  <link rel="preload" as="image" href="assets/img/hero.webp?v=20260906b" fetchpriority="high" />
+  <link rel="preload" as="image" href="assets/img/hero-mobile.webp?v=20261021a" media="(max-width: 640px)" fetchpriority="high" />
+  <link rel="preload" as="image" href="assets/img/hero.webp?v=20260906b" media="(min-width: 641px)" fetchpriority="high" />
   <link rel="stylesheet" href="styles.css?v=20260906b" />
 <!-- analytics:start -->
 <script>if(location.hostname==='allseasonslocksmith.com'){var g=document.createElement('script');g.async=true;g.src='https://www.googletagmanager.com/gtag/js?id=G-JRGPYGJLYK';document.head.appendChild(g);window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-JRGPYGJLYK');}</script>
@@ -120,7 +121,7 @@
   <header class="nav" data-nav>
     <div class="nav-inner container">
       <a href="#top" class="nav-brand" aria-label="All Seasons Locksmith — home">
-        <span class="nav-logo-chip"><img class="nav-logo" src="assets/brand/logo-full.png?v=20260906b" alt="All Seasons Locksmith" /></span>
+        <span class="nav-logo-chip"><img class="nav-logo" src="assets/brand/logo-nav.webp?v=20261021b" width="200" height="200" alt="All Seasons Locksmith" /></span>
       </a>
 
       <nav class="nav-links" aria-label="Primary">
@@ -164,7 +165,7 @@
         </video>
         -->
         <picture class="hero-picture">
-          <source media="(max-width: 640px)" srcset="assets/img/hero-mobile.webp?v=20260906b" />
+          <source media="(max-width: 640px)" srcset="assets/img/hero-mobile.webp?v=20261021a" />
           <img class="hero-img ambient" src="assets/img/hero.webp?v=20260906b"
                alt="All Seasons Locksmith mobile van and technician ready for a call in Central Pennsylvania"
                fetchpriority="high" loading="eager" decoding="async" />
@@ -173,25 +174,25 @@
       </div>
 
       <div class="hero-inner container">
-        <p class="hero-kicker" data-reveal>
+        <p class="hero-kicker hero-in">
           <span class="hero-dot" aria-hidden="true"></span>
           <span data-loc="heroKicker">Serving Harrisburg &amp; Central Pennsylvania</span>
         </p>
 
-        <h1 class="hero-title" data-reveal>
+        <h1 class="hero-title hero-in" style="--hi-i: 1;">
           Locked out in <span class="accent">Central PA</span>?
           <br class="hero-br" />
           We're already on the way.
         </h1>
 
-        <p class="hero-sub" data-reveal>
+        <p class="hero-sub hero-in" style="--hi-i: 2;">
           A mobile locksmith for your car, home, and business across
           <span data-loc="townState">Harrisburg, PA</span> and all of Dauphin,
           Cumberland &amp; Lebanon counties. Non-destructive entry and a real
           person on the phone.
         </p>
 
-        <div class="hero-badges" data-reveal>
+        <div class="hero-badges hero-in" style="--hi-i: 3;">
           <span class="badge badge-days" data-loc-daysOpen>6 Days a Week</span>
           <span class="badge badge-emergency">
             <span class="badge-pulse" aria-hidden="true"></span>
@@ -250,7 +251,7 @@
         <div class="svc-grid" data-services>
           <article class="svc-card" data-reveal data-tilt>
             <div class="ph ph-svc" role="img" aria-label="Automotive locksmith">
-              <img src="assets/img/service-automotive.webp?v=20260906b" alt="Automotive locksmith — car key and fob programming in Harrisburg, PA" loading="lazy" decoding="async" />
+              <img src="assets/img/service-automotive.webp?v=20261021a" alt="Automotive locksmith — car key and fob programming in Harrisburg, PA" loading="lazy" decoding="async" />
             </div>
             <div class="svc-body">
               <span class="svc-num">01</span>
@@ -268,7 +269,7 @@
 
           <article class="svc-card" data-reveal data-tilt>
             <div class="ph ph-svc" role="img" aria-label="Residential locksmith">
-              <img src="assets/img/service-residential.webp?v=20260906b" alt="Residential locksmith — deadbolt and smart lock installation in Central PA" loading="lazy" decoding="async" />
+              <img src="assets/img/service-residential.webp?v=20261021a" alt="Residential locksmith — deadbolt and smart lock installation in Central PA" loading="lazy" decoding="async" />
             </div>
             <div class="svc-body">
               <span class="svc-num">02</span>
@@ -286,7 +287,7 @@
 
           <article class="svc-card" data-reveal data-tilt>
             <div class="ph ph-svc" role="img" aria-label="Commercial locksmith">
-              <img src="assets/img/service-commercial.webp?v=20260906b" alt="Commercial locksmith — master key and access control for businesses" loading="lazy" decoding="async" />
+              <img src="assets/img/service-commercial.webp?v=20261021a" alt="Commercial locksmith — master key and access control for businesses" loading="lazy" decoding="async" />
             </div>
             <div class="svc-body">
               <span class="svc-num">03</span>
@@ -304,7 +305,7 @@
 
           <article class="svc-card svc-card--accent" data-reveal data-tilt>
             <div class="ph ph-svc" role="img" aria-label="Emergency locksmith">
-              <img src="assets/img/service-emergency.webp?v=20260906b" alt="Emergency locksmith — lockouts and broken key extraction, evenings included" loading="lazy" decoding="async" />
+              <img src="assets/img/service-emergency.webp?v=20261021a" alt="Emergency locksmith — lockouts and broken key extraction, evenings included" loading="lazy" decoding="async" />
             </div>
             <div class="svc-body">
               <span class="svc-num">04</span>
@@ -650,7 +651,7 @@
     <div class="container footer-grid">
       <div class="footer-brand">
         <a href="#top" class="nav-brand" aria-label="All Seasons Locksmith — home">
-          <span class="nav-logo-chip"><img class="nav-logo footer-logo" src="assets/brand/logo-full.png?v=20260906b" alt="All Seasons Locksmith" /></span>
+          <span class="nav-logo-chip"><img class="nav-logo footer-logo" src="assets/brand/logo-nav.webp?v=20261021b" width="200" height="200" alt="All Seasons Locksmith" /></span>
         </a>
         <p class="footer-tag">Mobile locksmith serving Harrisburg &amp; Central Pennsylvania.</p>
         <a href="tel:+12232403505" class="footer-phone" data-loc-phone>(223) 240-3505</a>
