@@ -40,7 +40,7 @@
       </button>
     </div>
 
-    <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" hidden>
+    <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
       <a href="/services/">Services</a>
       <a href="/service-areas/">Service Areas</a>
       <a href="/about/">About</a>
@@ -217,7 +217,8 @@
       function setOpen(open) {
         toggle.setAttribute('aria-expanded', String(open));
         toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-        menu.hidden = !open;
+        menu.classList.toggle('is-open', open);
+        menu.setAttribute('aria-hidden', String(!open));
       }
       toggle.addEventListener('click', function () {
         setOpen(toggle.getAttribute('aria-expanded') !== 'true');
