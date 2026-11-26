@@ -12,10 +12,15 @@
   padding-top: 7.5rem;
   padding-bottom: 6rem;
 }
-.hero.hero--alt .hero-title { margin-top: 0.5rem; }
-.hero.hero--alt .hero-sub { margin-top: 1.75rem; }
-.hero.hero--alt .hero-actions { margin-top: 2.25rem; }
-.hero.hero--alt .hero-badge { margin-top: 1.5rem; }
+/* One vertical rhythm for the hero text: a single grid gap between every element.
+   Live styles.css sets different margins per element (1.6rem, 1.8rem, 2rem, 2.6rem),
+   so the child margins are reset here and the grid gap does the spacing. */
+.hero.hero--alt .hero-inner {
+  display: grid;
+  gap: 1.75rem;
+  justify-items: start;
+}
+.hero.hero--alt .hero-inner > * { margin: 0; }
 
 /* ---------- Section backgrounds ---------- */
 .alt-section { position: relative; }
