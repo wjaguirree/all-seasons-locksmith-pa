@@ -180,7 +180,7 @@
 /* ---------- Layout breakpoints ---------- */
 @media (min-width: 760px) {
   .alt-problem-grid { grid-template-columns: repeat(3, 1fr); }
-  .alt-stats { grid-template-columns: repeat(3, 1fr); }
+  .alt-stats { grid-template-columns: repeat(2, 1fr); }
   .alt-stats > div + div { border-left: 1px solid var(--line); }
   .alt-steps { grid-template-columns: repeat(3, 1fr); gap: 3rem; }
   .alt-promise-grid { grid-template-columns: repeat(2, 1fr); }
