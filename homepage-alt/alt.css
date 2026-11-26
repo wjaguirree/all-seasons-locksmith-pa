@@ -210,8 +210,8 @@
    side so the copy keeps AA contrast; the van and technician show on the right. */
 .alt-section--photo {
   background:
-    linear-gradient(90deg, rgba(11, 18, 32, 0.96) 0%, rgba(11, 18, 32, 0.9) 42%, rgba(11, 18, 32, 0.45) 100%),
-    url("../assets/img/about.webp") right center / cover no-repeat,
+    linear-gradient(180deg, rgba(11, 18, 32, 0.9) 0%, rgba(11, 18, 32, 0.84) 50%, rgba(11, 18, 32, 0.94) 100%),
+    url("../assets/img/about.webp") center 30% / cover no-repeat,
     var(--bg-2);
 }
 @media (max-width: 759px) {
