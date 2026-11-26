@@ -8,9 +8,9 @@
 /* Hero: min-height only, never full viewport height. Clears the fixed nav. */
 .hero.hero--alt {
   height: auto;
-  min-height: 560px;
-  padding-top: 6rem;
-  padding-bottom: 4rem;
+  min-height: 680px;
+  padding-top: 7.5rem;
+  padding-bottom: 6rem;
 }
 
 /* Section backgrounds */
