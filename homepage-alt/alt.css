@@ -1,115 +1,198 @@
 /* Homepage alt: additions to the live styles.css.
-   Shell, hero, trust bar, section heads, buttons, and footer all come from
-   ../styles.css so the alt matches the main homepage. This file only adds the
-   sections that the live homepage does not have, using the live tokens
-   (--ink, --ink-2, --ink-mute, --line, --bg-2, --bg-3, --brass, --brass-3,
-   --display, --mono). */
+   Shell, hero structure, trust bar, section heads, buttons, and footer all come
+   from ../styles.css so the alt matches the main homepage. This file adds the
+   sections the live homepage does not have, using the live tokens only
+   (--ink, --ink-2, --ink-mute, --line, --bg-2, --bg-3, --brass, --brass-2,
+   --brass-3, --brass-glow, --display, --mono, --ease-out). No new hues. */
 
-/* Hero: min-height only, never full viewport height. Clears the fixed nav. */
+/* ---------- Hero: min-height only, never full viewport height ---------- */
 .hero.hero--alt {
   height: auto;
   min-height: 740px;
   padding-top: 7.5rem;
   padding-bottom: 6rem;
 }
-/* More vertical room between hero elements */
 .hero.hero--alt .hero-title { margin-top: 0.5rem; }
 .hero.hero--alt .hero-sub { margin-top: 1.75rem; }
 .hero.hero--alt .hero-actions { margin-top: 2.25rem; }
 .hero.hero--alt .hero-badge { margin-top: 1.5rem; }
 
-/* Section backgrounds */
-.alt-section--tint { background: var(--bg-2); }
-.alt-section--final { background: var(--bg-3); border-top: 1px solid var(--line); }
+/* ---------- Section backgrounds ---------- */
+.alt-section { position: relative; }
+.alt-section--tint {
+  background:
+    radial-gradient(70% 60% at 85% 0%, var(--brass-glow), transparent 70%),
+    var(--bg-2);
+}
+.alt-section--final {
+  background:
+    radial-gradient(60% 90% at 50% 0%, var(--brass-glow), transparent 70%),
+    var(--bg-3);
+  border-top: 1px solid var(--line);
+}
 
-/* Problem and stakes cards */
+/* ---------- Problem + stakes cards ---------- */
 .alt-problem-grid {
   list-style: none; padding: 0; margin: 0;
   display: grid; gap: 1.25rem; grid-template-columns: 1fr;
 }
 .alt-card {
-  background: var(--bg-3);
+  position: relative;
+  background: linear-gradient(180deg, var(--bg-3), var(--bg-2));
   border: 1px solid var(--line);
-  border-left: 3px solid var(--brass);
   border-radius: 16px;
-  padding: 1.6rem 1.5rem;
+  padding: 1.9rem 1.6rem 1.7rem;
+  overflow: hidden;
+  transition:
+    transform 0.5s var(--ease-out),
+    border-color 0.4s var(--ease-out),
+    box-shadow 0.5s var(--ease-out);
+}
+/* Brass top rule, drawn as a pseudo-element so it reads as a finish, not a border */
+.alt-card::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--brass), var(--brass-3) 60%, transparent);
+  opacity: 0.85;
+}
+.alt-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(201, 162, 74, 0.45);
+  box-shadow: 0 18px 40px -22px rgba(201, 162, 74, 0.45);
 }
 .alt-card h3 {
   font-family: var(--display); font-weight: 700; font-size: 1.15rem;
-  letter-spacing: -0.01em; color: var(--ink); margin-bottom: 0.6rem; line-height: 1.25;
+  letter-spacing: -0.01em; color: var(--ink); margin-bottom: 0.7rem; line-height: 1.25;
 }
-.alt-card h3 .accent { margin-right: 0.4rem; }
-.alt-card p { color: var(--ink-mute); line-height: 1.6; }
+.alt-card h3 .accent { margin-right: 0.45rem; }
+.alt-card p { color: var(--ink-mute); line-height: 1.65; }
 
-/* Guide stats */
+/* ---------- Guide stats: divided, numbers as the focal point ---------- */
 .alt-stats {
   display: grid; gap: 1.25rem; grid-template-columns: 1fr;
-  margin: 2.5rem 0 0; padding: 0;
+  margin: 3rem 0 0; padding: 2.25rem 0 0;
+  border-top: 1px solid var(--line);
   text-align: center;
 }
+.alt-stats > div { padding: 0.5rem 0; }
 .alt-stats dt {
-  font-family: var(--display); font-weight: 700; font-size: clamp(2.5rem, 5vw, 3.5rem);
-  line-height: 1; color: var(--brass-3);
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(2.75rem, 5.5vw, 3.75rem);
+  line-height: 1; letter-spacing: -0.02em;
+  background: linear-gradient(180deg, var(--brass-3), var(--brass-2));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
 }
-.alt-stats dd { margin: 0.6rem 0 0; color: var(--ink-mute); font-size: 0.95rem; }
+.alt-stats dd {
+  margin: 0.75rem 0 0; color: var(--ink-mute);
+  font-family: var(--mono); font-size: 0.72rem;
+  letter-spacing: 0.22em; text-transform: uppercase;
+}
 
-/* Plan steps */
+/* ---------- Plan steps: connected line + glowing numerals ---------- */
 .alt-steps {
-  list-style: none; padding: 0; margin: 0 0 2.5rem;
+  list-style: none; padding: 0; margin: 0 0 2.75rem;
   display: grid; gap: 1.25rem; grid-template-columns: 1fr;
 }
 .alt-steps li {
   position: relative;
-  background: var(--bg-3); border: 1px solid var(--line); border-radius: 16px;
-  padding: 3.6rem 1.5rem 1.6rem;
+  background: linear-gradient(180deg, var(--bg-3), var(--bg-2));
+  border: 1px solid var(--line); border-radius: 16px;
+  padding: 3.8rem 1.6rem 1.7rem;
+  transition: transform 0.5s var(--ease-out), border-color 0.4s var(--ease-out);
 }
+.alt-steps li:hover { transform: translateY(-3px); border-color: rgba(201, 162, 74, 0.45); }
 .alt-steps h3 {
   font-family: var(--display); font-weight: 700; font-size: 1.15rem;
-  color: var(--ink); margin-bottom: 0.5rem;
+  color: var(--ink); margin-bottom: 0.55rem;
 }
-.alt-steps p { color: var(--ink-2); line-height: 1.6; }
+.alt-steps p { color: var(--ink-2); line-height: 1.65; }
 .alt-steps a { color: var(--brass-3); font-weight: 600; text-decoration: none; }
 .alt-steps a:hover { text-decoration: underline; }
 .alt-step-num {
-  position: absolute; top: 1.4rem; left: 1.5rem;
-  width: 34px; height: 34px; border-radius: 999px;
+  position: absolute; top: 1.35rem; left: 1.6rem;
+  width: 38px; height: 38px; border-radius: 999px;
   display: inline-flex; align-items: center; justify-content: center;
   background: var(--brass); color: #241a05;
-  font-family: var(--mono); font-weight: 500; font-size: 0.9rem;
+  font-family: var(--mono); font-weight: 500; font-size: 0.95rem;
+  box-shadow: 0 0 0 6px var(--brass-glow);
 }
 
-/* Stakes contrast line */
+/* ---------- Stakes ---------- */
+.alt-card .accent {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; border-radius: 999px;
+  border: 1px solid rgba(201, 162, 74, 0.5);
+  font-size: 0.7rem; line-height: 1; vertical-align: 0.1em;
+}
 .alt-contrast {
-  color: var(--ink); max-width: 60ch; line-height: 1.6;
-  margin: 2.25rem 0 0; text-align: center; margin-inline: auto;
+  color: var(--ink); max-width: 60ch; line-height: 1.65;
+  margin: 2.5rem auto 0; text-align: center;
+  padding: 1.25rem 1.5rem;
+  border-left: 3px solid var(--brass);
+  background: rgba(20, 31, 50, 0.45);
+  border-radius: 0 12px 12px 0;
 }
 
-/* Promise grid */
+/* ---------- Promise: check-marked list ---------- */
 .alt-promise-grid {
   list-style: none; padding: 0; margin: 0;
   display: grid; gap: 1.5rem; grid-template-columns: 1fr;
 }
-.alt-promise-grid li { border-top: 1px solid var(--line); padding-top: 1.2rem; }
+.alt-promise-grid li {
+  position: relative;
+  border-top: 1px solid var(--line);
+  padding: 1.4rem 0 0 2.2rem;
+}
+.alt-promise-grid li::before {
+  content: "";
+  position: absolute; left: 0; top: 1.5rem;
+  width: 14px; height: 8px;
+  border-left: 2px solid var(--brass-3);
+  border-bottom: 2px solid var(--brass-3);
+  transform: rotate(-45deg);
+}
 .alt-promise-grid h3 {
   font-family: var(--display); font-weight: 700; font-size: 1.1rem;
-  color: var(--brass-3); margin-bottom: 0.4rem;
+  letter-spacing: -0.01em; color: var(--brass-3); margin-bottom: 0.45rem;
 }
-.alt-promise-grid p { color: var(--ink-2); line-height: 1.6; }
+.alt-promise-grid p { color: var(--ink-2); line-height: 1.65; }
 
-/* Centered CTA row */
-.alt-center { text-align: center; margin-top: 2rem; }
+/* ---------- Centered CTA row ---------- */
+.alt-center { text-align: center; margin-top: 2.25rem; }
 
-/* Final CTA block */
+/* ---------- Final CTA block ---------- */
 .alt-final {
-  display: grid; justify-items: center; text-align: center; gap: 1rem;
+  display: grid; justify-items: center; text-align: center; gap: 1.1rem;
 }
 .alt-final .section-title { margin-bottom: 0; }
 .alt-final .section-lead { margin-inline: auto; }
-.alt-note { color: var(--ink-mute); font-size: 0.85rem; max-width: 52ch; }
+.alt-note {
+  color: var(--ink-mute); font-size: 0.85rem; max-width: 52ch;
+  font-family: var(--mono); letter-spacing: 0.02em;
+}
 
+/* ---------- Layout breakpoints ---------- */
 @media (min-width: 760px) {
   .alt-problem-grid { grid-template-columns: repeat(3, 1fr); }
-  .alt-stats { grid-template-columns: repeat(3, 1fr); }
-  .alt-steps { grid-template-columns: repeat(3, 1fr); }
+  .alt-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .alt-stats > div + div { border-left: 1px solid var(--line); }
+  .alt-steps { grid-template-columns: repeat(3, 1fr); position: relative; }
+  /* connector line through the numerals */
+  .alt-steps::before {
+    content: "";
+    position: absolute; top: calc(1.35rem + 19px); left: 12%; right: 12%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--brass), transparent);
+    opacity: 0.45;
+    pointer-events: none;
+  }
   .alt-promise-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---------- Motion preference ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .alt-card, .alt-steps li { transition: none; }
+  .alt-card:hover, .alt-steps li:hover { transform: none; }
 }
