@@ -8,7 +8,7 @@
 /* ---------- Hero: min-height only, never full viewport height ---------- */
 .hero.hero--alt {
   height: auto;
-  min-height: 740px;
+  min-height: 820px;
   padding-top: 7.5rem;
   padding-bottom: 6rem;
 }
