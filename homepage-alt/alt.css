@@ -9,8 +9,8 @@
 .hero.hero--alt {
   height: auto;
   min-height: 560px;
-  padding-top: clamp(8rem, 16vh, 10rem);
-  padding-bottom: clamp(4rem, 8vh, 6rem);
+  padding-top: 6rem;
+  padding-bottom: 4rem;
 }
 
 /* Section backgrounds */
