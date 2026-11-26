@@ -199,3 +199,21 @@
 }
 .alt-body p + p { margin-top: 1.9rem; }
 .alt-body strong { color: var(--ink); font-weight: 600; }
+
+/* ---------- Guide section: site photo behind the copy ----------
+   Uses the existing about.webp from the site. A dark gradient covers the left
+   side so the copy keeps AA contrast; the van and technician show on the right. */
+.alt-section--photo {
+  background:
+    linear-gradient(90deg, rgba(11, 18, 32, 0.96) 0%, rgba(11, 18, 32, 0.9) 42%, rgba(11, 18, 32, 0.45) 100%),
+    url("../assets/img/about.webp") right center / cover no-repeat,
+    var(--bg-2);
+}
+@media (max-width: 759px) {
+  .alt-section--photo {
+    background:
+      linear-gradient(180deg, rgba(11, 18, 32, 0.92) 0%, rgba(11, 18, 32, 0.96) 100%),
+      url("../assets/img/about.webp") center / cover no-repeat,
+      var(--bg-2);
+  }
+}
