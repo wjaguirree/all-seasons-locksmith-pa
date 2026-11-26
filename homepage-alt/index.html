@@ -7,92 +7,142 @@
   <meta name="description" content="Locally owned, bonded and insured locksmith serving Harrisburg and Central PA. Hear your upfront quote by phone before anyone is dispatched. Call (223) 240-3505." />
   <meta name="robots" content="noindex, nofollow" />
   <link rel="canonical" href="https://allseasonslocksmith.com/" />
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#10130f" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Roboto+Slab:wght@600;700&display=swap" /></noscript>
+
+  <link rel="preload" as="image" href="../assets/img/hero-mobile.webp?v=20261021a" media="(max-width: 640px)" fetchpriority="high" />
+  <link rel="preload" as="image" href="../assets/img/hero.webp?v=20260906b" media="(min-width: 641px)" fetchpriority="high" />
+  <link rel="stylesheet" href="../styles.css?v=20260906b" />
   <link rel="stylesheet" href="alt.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="#top" class="brand" aria-label="All Seasons Locksmith home">
-        <span class="logo-chip"><img src="../assets/brand/logo-nav.webp" width="200" height="200" alt="All Seasons Locksmith" /></span>
+  <!-- ============================ NAV ============================ -->
+  <header class="nav" data-nav>
+    <div class="nav-inner container">
+      <a href="#top" class="nav-brand" aria-label="All Seasons Locksmith home">
+        <span class="nav-logo-chip"><img class="nav-logo" src="../assets/brand/logo-nav.webp?v=20261021b" width="200" height="200" alt="All Seasons Locksmith" /></span>
       </a>
 
-      <nav class="site-nav" aria-label="Primary">
-        <a href="/services/">Services</a>
-        <a href="/service-areas/">Service Areas</a>
-        <a href="/about/">About</a>
-        <a href="/blog/">Blog</a>
-        <a href="/faq/">FAQ</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/services/" class="nav-link">Services</a>
+        <a href="/service-areas/" class="nav-link">Service Areas</a>
+        <a href="/about/" class="nav-link">About</a>
+        <a href="/blog/" class="nav-link">Blog</a>
+        <a href="/faq/" class="nav-link">FAQ</a>
       </nav>
 
-      <a href="tel:+12232403505" class="btn btn--ghost header-call">
-        <span>Call</span> (223) 240-3505
+      <a href="tel:+12232403505" class="nav-cta" data-loc-phone>
+        <span class="nav-cta-label">Call</span>
+        <span class="nav-cta-num">(223) 240-3505</span>
       </a>
 
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
-        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+      <button class="nav-toggle" data-menu-toggle aria-expanded="false" aria-label="Open menu">
+        <span></span><span></span><span></span>
       </button>
     </div>
-
-    <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
-      <a href="/services/">Services</a>
-      <a href="/service-areas/">Service Areas</a>
-      <a href="/about/">About</a>
-      <a href="/blog/">Blog</a>
-      <a href="/faq/">FAQ</a>
-      <a href="tel:+12232403505" class="btn btn--primary">Call (223) 240-3505</a>
-    </nav>
   </header>
+
+  <nav class="mobile-menu" data-mobile-menu aria-label="Mobile navigation">
+    <a href="/services/">Services</a>
+    <a href="/service-areas/">Service Areas</a>
+    <a href="/about/">About</a>
+    <a href="/blog/">Blog</a>
+    <a href="/faq/">FAQ</a>
+    <a href="tel:+12232403505" class="mm-call" data-loc-phone>Call (223) 240-3505</a>
+  </nav>
 
   <main id="main">
     <span id="top"></span>
 
-    <!-- HERO: full-width background image, text overlaid left -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-bg" aria-hidden="true"></div>
-      <div class="hero-scrim" aria-hidden="true"></div>
-      <div class="container hero-content">
-        <h1 id="hero-title">The Locksmith Central PA Can Trust</h1>
-        <p class="hero-sub">Locked out, or need locks you can count on? Hear your upfront quote by phone before we dispatch, then a local tech finishes the job in one visit.</p>
-        <div class="hero-actions">
-          <a href="tel:+12232403505" class="btn btn--primary">Call for Your Upfront Quote</a>
-          <a href="#plan" class="btn btn--ghost">See How It Works</a>
+    <!-- ============================ HERO ============================ -->
+    <!-- hero--alt: min-height only (560px), never full viewport height -->
+    <section class="hero hero--alt" id="hero">
+      <div class="hero-media" data-hero-media>
+        <picture class="hero-picture">
+          <source media="(max-width: 640px)" srcset="../assets/img/hero-mobile.webp?v=20261021a" />
+          <img class="hero-img ambient" src="../assets/img/hero.webp?v=20260906b"
+               alt="All Seasons Locksmith mobile van and technician ready for a call in Central Pennsylvania"
+               fetchpriority="high" loading="eager" decoding="async" />
+        </picture>
+        <div class="hero-scrim" aria-hidden="true"></div>
+      </div>
+
+      <div class="hero-inner container">
+        <p class="hero-kicker hero-in">
+          <span class="hero-dot" aria-hidden="true"></span>
+          <span>Serving Harrisburg &amp; Central Pennsylvania</span>
+        </p>
+
+        <h1 class="hero-title hero-in" style="--hi-i: 1;">
+          The Locksmith <span class="accent">Central PA</span> Can Trust
+        </h1>
+
+        <p class="hero-sub hero-in" style="--hi-i: 2;">
+          Locked out, or need locks you can count on? Hear your upfront quote by phone before we dispatch, then a local tech finishes the job in one visit.
+        </p>
+
+        <div class="hero-actions hero-in" style="--hi-i: 3;">
+          <a href="tel:+12232403505" class="btn btn-primary" data-loc-phone>
+            <span>Call for Your Upfront Quote</span>
+          </a>
+          <a href="#plan" class="btn btn-ghost">See How It Works</a>
         </div>
-        <p class="hero-badge">Locally owned, bonded and insured. Serving 31 towns from Harrisburg.</p>
+
+        <p class="hero-badge hero-in" style="--hi-i: 4;">Locally owned, bonded and insured. Serving 31 towns from Harrisburg.</p>
+      </div>
+
+      <a href="#trust" class="hero-scroll" aria-label="Scroll down">
+        <span class="hero-scroll-line" aria-hidden="true"></span>
+      </a>
+    </section>
+
+    <!-- ============================ TRUST BAR ============================ -->
+    <section class="trust" id="trust" aria-label="Why you can trust us">
+      <div class="container trust-grid" data-reveal>
+        <div class="trust-item">
+          <span class="trust-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><path d="M12 2.5 4 6v5.5c0 4.6 3.2 7.9 8 9.9 4.8-2 8-5.3 8-9.9V6l-8-3.5Z" stroke="currentColor" stroke-width="1.4"/><path d="m8.6 12 2.3 2.4 4.5-4.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <h2>Bonded &amp; Insured</h2>
+          <p>Locally owned and fully covered.</p>
+        </div>
+        <div class="trust-item">
+          <span class="trust-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><path d="M2.5 15.5V9.8c0-.5.3-1 .7-1.3L9 5.2c.6-.4 1.4-.4 2 0l5.8 3.3c.4.3.7.7.7 1.3v5.7" stroke="currentColor" stroke-width="1.4"/><path d="M2.5 15.5h19M17 15.5v-4h2.6c.5 0 1 .3 1.2.8l1.2 2.4c.1.2.1.4.1.6v.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="18" r="2" stroke="currentColor" stroke-width="1.4"/><circle cx="17.5" cy="18" r="2" stroke="currentColor" stroke-width="1.4"/></svg></span>
+          <h2>5 Local Technicians</h2>
+          <p>Our own techs, dispatched from Harrisburg.</p>
+        </div>
+        <div class="trust-item">
+          <span class="trust-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><path d="M12 21s-6.5-5.6-6.5-10.5a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21Z" stroke="currentColor" stroke-width="1.4"/><circle cx="12" cy="10.5" r="2.3" stroke="currentColor" stroke-width="1.4"/></svg></span>
+          <h2>31 Towns Served</h2>
+          <p>Across Dauphin, Cumberland &amp; Lebanon counties.</p>
+        </div>
+        <div class="trust-item">
+          <span class="trust-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><rect x="3.5" y="3.5" width="17" height="17" rx="3" stroke="currentColor" stroke-width="1.4"/><path d="M7 8h10M7 12h10M7 16h6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+          <h2>Upfront Quote</h2>
+          <p>You hear the price by phone before anyone is dispatched.</p>
+        </div>
       </div>
     </section>
 
-    <!-- TRUST BAR -->
-    <section class="trust-bar" aria-label="Credentials">
-      <ul class="container trust-list">
-        <li><span aria-hidden="true">✓</span> 5 local technicians</li>
-        <li><span aria-hidden="true">✓</span> 31 towns served</li>
-        <li><span aria-hidden="true">✓</span> 3 counties</li>
-        <li><span aria-hidden="true">✓</span> Bonded and insured</li>
-      </ul>
-    </section>
-
-    <!-- PROBLEM -->
-    <section class="section" id="problem" aria-labelledby="problem-title">
+    <!-- ============================ PROBLEM ============================ -->
+    <section class="section alt-section" id="problem" aria-labelledby="problem-title">
       <div class="container">
-        <h2 id="problem-title">Sound Familiar?</h2>
-        <p class="lede">Needing a locksmith usually happens at the worst moment, and it's hard to know who to call.</p>
-        <ul class="problem-list">
-          <li>
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">Sound familiar?</p>
+          <h2 class="section-title" id="problem-title">Needing a locksmith usually happens at the <span class="accent">worst moment.</span></h2>
+          <p class="section-lead">And it's hard to know who to call.</p>
+        </header>
+        <ul class="alt-problem-grid" data-reveal>
+          <li class="alt-card">
             <h3>Locked Out, or Locks You Can't Trust</h3>
             <p>Maybe you're stuck outside your car, home, or business right now. Maybe you just moved in and have no idea who still has a key.</p>
           </li>
-          <li>
+          <li class="alt-card">
             <h3>Stressed, Exposed, and Wary</h3>
             <p>Being stranded is stressful, and feeling exposed is worse. Add the worry of a quote that jumps once the work starts.</p>
           </li>
-          <li>
+          <li class="alt-card">
             <h3>You Should Know the Price First</h3>
             <p>Everyone deserves to know the price before the work starts. Calling a locksmith shouldn't mean hoping for the best.</p>
           </li>
@@ -100,13 +150,15 @@
       </div>
     </section>
 
-    <!-- GUIDE -->
-    <section class="section section--alt" id="guide" aria-labelledby="guide-title">
+    <!-- ============================ GUIDE ============================ -->
+    <section class="section alt-section alt-section--tint" id="guide" aria-labelledby="guide-title">
       <div class="container">
-        <p class="eyebrow">Meet Your Guide</p>
-        <h2 id="guide-title">We understand what it's like to stand outside your own door.</h2>
-        <p class="lede">Or your car, not knowing who to call or what it'll cost. All Seasons Locksmith is locally owned, bonded and insured. Our five technicians work out of a Harrisburg office and serve 31 towns across Dauphin, Cumberland, and Lebanon counties. When you call, you reach us, not a call center.</p>
-        <dl class="stats">
+        <header class="section-head section-head--left" data-reveal>
+          <p class="eyebrow">Meet your guide</p>
+          <h2 class="section-title" id="guide-title">We understand what it's like to stand <span class="accent">outside your own door.</span></h2>
+          <p class="section-lead">Or your car, not knowing who to call or what it'll cost. All Seasons Locksmith is locally owned, bonded and insured. Our five technicians work out of a Harrisburg office and serve 31 towns across Dauphin, Cumberland, and Lebanon counties. When you call, you reach us, not a call center.</p>
+        </header>
+        <dl class="alt-stats" data-reveal>
           <div><dt>5</dt><dd>Local Technicians</dd></div>
           <div><dt>31</dt><dd>Towns Served</dd></div>
           <div><dt>3</dt><dd>Counties Covered</dd></div>
@@ -114,61 +166,74 @@
       </div>
     </section>
 
-    <!-- PLAN -->
-    <section class="section" id="plan" aria-labelledby="plan-title">
+    <!-- ============================ PLAN ============================ -->
+    <section class="section alt-section" id="plan" aria-labelledby="plan-title">
       <div class="container">
-        <h2 id="plan-title">How It Works</h2>
-        <p class="lede">Three steps, and you know the price before we head your way.</p>
-        <ol class="steps">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">How it works</p>
+          <h2 class="section-title" id="plan-title">Three steps, and you know the <span class="accent">price first.</span></h2>
+          <p class="section-lead">Before we head your way.</p>
+        </header>
+        <ol class="alt-steps" data-reveal>
           <li>
-            <span class="step-num" aria-hidden="true">1</span>
+            <span class="alt-step-num" aria-hidden="true">1</span>
             <h3>Call</h3>
-            <p>Call <a href="tel:+12232403505">(223) 240-3505</a>. Tell us what's going on and where you are.</p>
+            <p>Call <a href="tel:+12232403505" data-loc-phone>(223) 240-3505</a>. Tell us what's going on and where you are.</p>
           </li>
           <li>
-            <span class="step-num" aria-hidden="true">2</span>
+            <span class="alt-step-num" aria-hidden="true">2</span>
             <h3>Get Your Upfront Quote</h3>
             <p>You hear the price by phone before anyone is dispatched.</p>
           </li>
           <li>
-            <span class="step-num" aria-hidden="true">3</span>
+            <span class="alt-step-num" aria-hidden="true">3</span>
             <h3>One Visit, Job Done</h3>
             <p>A local tech arrives, uses non-destructive entry where possible, and finishes in one trip.</p>
           </li>
         </ol>
-        <a href="tel:+12232403505" class="btn btn--primary">Call for Your Upfront Quote</a>
+        <div class="alt-center" data-reveal>
+          <a href="tel:+12232403505" class="btn btn-primary" data-loc-phone><span>Call for Your Upfront Quote</span></a>
+        </div>
       </div>
     </section>
 
-    <!-- STAKES -->
-    <section class="section section--alt" id="stakes" aria-labelledby="stakes-title">
+    <!-- ============================ STAKES ============================ -->
+    <section class="section alt-section alt-section--tint" id="stakes" aria-labelledby="stakes-title">
       <div class="container">
-        <h2 id="stakes-title">What Happens If You Wait?</h2>
-        <p class="lede">Picking the wrong locksmith, or putting off a rekey, can leave you worse off than when you started.</p>
-        <ul class="stake-list">
-          <li>
-            <h3><span aria-hidden="true">✕</span> A Quote That Changes</h3>
+        <header class="section-head section-head--left" data-reveal>
+          <p class="eyebrow">Before you call someone else</p>
+          <h2 class="section-title" id="stakes-title">What happens if you <span class="accent">wait?</span></h2>
+          <p class="section-lead">Picking the wrong locksmith, or putting off a rekey, can leave you worse off than when you started.</p>
+        </header>
+        <ul class="alt-problem-grid" data-reveal>
+          <li class="alt-card">
+            <h3><span class="accent" aria-hidden="true">✕</span> A Quote That Changes</h3>
             <p>Some quote low, then raise it after the work.</p>
           </li>
-          <li>
-            <h3><span aria-hidden="true">✕</span> Damage That Didn't Need to Happen</h3>
+          <li class="alt-card">
+            <h3><span class="accent" aria-hidden="true">✕</span> Damage That Didn't Need to Happen</h3>
             <p>A drilled lock when a gentler method would work.</p>
           </li>
-          <li>
-            <h3><span aria-hidden="true">✕</span> Old Keys Still Out There</h3>
+          <li class="alt-card">
+            <h3><span class="accent" aria-hidden="true">✕</span> Old Keys Still Out There</h3>
             <p>Past tenants, old contractors, and ex-employees may still have a way in.</p>
           </li>
         </ul>
-        <p class="contrast">With All Seasons Locksmith, you know the price first, we try non-destructive methods before anything else, and you decide who has a key.</p>
-        <a href="tel:+12232403505" class="btn btn--primary">Call for Your Upfront Quote</a>
+        <p class="alt-contrast" data-reveal>With All Seasons Locksmith, you know the price first, we try non-destructive methods before anything else, and you decide who has a key.</p>
+        <div class="alt-center" data-reveal>
+          <a href="tel:+12232403505" class="btn btn-primary" data-loc-phone><span>Call for Your Upfront Quote</span></a>
+        </div>
       </div>
     </section>
 
-    <!-- PROMISE -->
-    <section class="section" id="promise" aria-labelledby="promise-title">
+    <!-- ============================ PROMISE ============================ -->
+    <section class="section alt-section" id="promise" aria-labelledby="promise-title">
       <div class="container">
-        <h2 id="promise-title">Our Promise to You</h2>
-        <ul class="promise-list">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">Our promise</p>
+          <h2 class="section-title" id="promise-title">Here's what you can <span class="accent">count on.</span></h2>
+        </header>
+        <ul class="alt-promise-grid" data-reveal>
           <li><h3>Quote Before Dispatch</h3><p>The price you hear on the phone is confirmed before any work starts.</p></li>
           <li><h3>A Real Local Company</h3><p>Harrisburg office, our own technicians, no call center.</p></li>
           <li><h3>Non-Destructive First</h3><p>We try to get you in without drilling or damage.</p></li>
@@ -177,60 +242,89 @@
       </div>
     </section>
 
-    <!-- FINAL CTA -->
-    <section class="section section--final" aria-labelledby="final-title">
-      <div class="container final-inner">
-        <h2 id="final-title">Need a Locksmith You Can Trust?</h2>
-        <p class="lede">Call now for your upfront quote. You'll know the price before we head your way.</p>
-        <a href="tel:+12232403505" class="btn btn--primary btn--lg">Call (223) 240-3505</a>
-        <p class="final-note">Locally owned, bonded and insured. Open Sun to Thu 7am to 10pm, Fri 7am to 3:45pm.</p>
+    <!-- ============================ FINAL CTA ============================ -->
+    <section class="section alt-section alt-section--final" aria-labelledby="final-title">
+      <div class="container alt-final">
+        <h2 class="section-title" id="final-title">Need a locksmith you <span class="accent">can trust?</span></h2>
+        <p class="section-lead">Call now for your upfront quote. You'll know the price before we head your way.</p>
+        <a href="tel:+12232403505" class="btn btn-primary btn-lg" data-loc-phone><span>Call (223) 240-3505</span></a>
+        <p class="alt-note">Locally owned, bonded and insured. Open Sun to Thu 7am to 10pm, Fri 7am to 3:45pm.</p>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="footer">
     <div class="container footer-grid">
-      <div>
-        <p class="footer-brand">All Seasons Locksmith</p>
-        <p>Mobile locksmith serving Harrisburg and Central Pennsylvania.</p>
-        <a href="tel:+12232403505">(223) 240-3505</a>
+      <div class="footer-brand">
+        <a href="#top" class="nav-brand" aria-label="All Seasons Locksmith home">
+          <span class="nav-logo-chip"><img class="nav-logo footer-logo" src="../assets/brand/logo-nav.webp?v=20261021b" width="200" height="200" alt="All Seasons Locksmith" /></span>
+        </a>
+        <p class="footer-tag">Mobile locksmith serving Harrisburg &amp; Central Pennsylvania.</p>
+        <a href="tel:+12232403505" class="footer-phone" data-loc-phone>(223) 240-3505</a>
       </div>
-      <div>
-        <p class="footer-heading">Hours</p>
-        <p>Sun to Thu 7:00 AM to 10:00 PM<br />Fri 7:00 AM to 3:45 PM<br />Saturday closed</p>
-        <p>In-store visits are by appointment only.</p>
+
+      <div class="footer-col">
+        <p class="footer-heading">Services</p>
+        <ul>
+          <li><a href="/services/">Automotive Locksmith</a></li>
+          <li><a href="/services/">Residential Locksmith</a></li>
+          <li><a href="/services/">Commercial Locksmith</a></li>
+          <li><a href="/services/">Emergency Locksmith</a></li>
+        </ul>
       </div>
-      <div>
-        <p class="footer-heading">Visit</p>
-        <p>1727 N 6th St STE 301<br />Harrisburg, PA 17102</p>
+
+      <div class="footer-col">
+        <p class="footer-heading">Service Areas</p>
+        <ul>
+          <li><a href="/service-areas/harrisburg-pa/">Harrisburg, PA</a></li>
+          <li><a href="/service-areas/carlisle-pa/">Carlisle, PA</a></li>
+          <li><a href="/service-areas/lebanon-pa/">Lebanon, PA</a></li>
+          <li><a href="/service-areas/mechanicsburg-pa/">Mechanicsburg, PA</a></li>
+          <li><a href="/service-areas/hershey-pa/">Hershey, PA</a></li>
+          <li><a href="/service-areas/">View all 31 towns →</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">Company</p>
+        <ul>
+          <li><a href="/about/">About Us</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/privacy-policy/">Privacy Policy</a></li>
+          <li><a href="/terms-of-service/">Terms of Service</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">Hours &amp; Visits</p>
+        <ul class="footer-hours" data-hours>
+          <li><span>Sun – Thu</span><span>7:00 AM – 10:00 PM</span></li>
+          <li><span>Friday</span><span>7:00 AM – 3:45 PM</span></li>
+          <li><span>Saturday</span><span>Closed</span></li>
+        </ul>
+        <p class="footer-appt" data-appt>In-store visits are by appointment only.</p>
       </div>
     </div>
+
     <div class="container footer-base">
-      <p>&copy; <span id="year">2026</span> All Seasons Locksmith. Insured mobile locksmith, Central Pennsylvania.</p>
+      <address class="footer-contact-line">
+        <a href="tel:+12232403505" data-loc-phone>(223) 240-3505</a><span>· <a href="mailto:allseasonslocksmith@gmail.com">allseasonslocksmith@gmail.com</a></span>
+        <span>· 1727 N 6th St STE 301, Harrisburg, PA 17102</span>
+      </address>
+      <p>&copy; <span data-year>2026</span> All Seasons Locksmith. Insured mobile locksmith, Central Pennsylvania.</p>
     </div>
   </footer>
 
-  <script>
-    (function () {
-      var toggle = document.querySelector('.menu-toggle');
-      var menu = document.getElementById('mobile-menu');
-      function setOpen(open) {
-        toggle.setAttribute('aria-expanded', String(open));
-        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-        menu.classList.toggle('is-open', open);
-        menu.setAttribute('aria-hidden', String(!open));
-      }
-      toggle.addEventListener('click', function () {
-        setOpen(toggle.getAttribute('aria-expanded') !== 'true');
-      });
-      menu.addEventListener('click', function (e) {
-        if (e.target.tagName === 'A') setOpen(false);
-      });
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') { setOpen(false); toggle.focus(); }
-      });
-      document.getElementById('year').textContent = new Date().getFullYear();
-    })();
-  </script>
+  <div class="callbar" aria-label="Quick contact">
+    <a href="tel:+12232403505" class="cb-call" data-loc-phone>📞 Call (223) 240-3505</a>
+    <a href="#plan" class="cb-quote">How it works</a>
+  </div>
+
+  <script defer src="../lib/gsap.min.js"></script>
+  <script defer src="../lib/ScrollTrigger.min.js"></script>
+  <script defer src="../lib/manifest.js"></script>
+  <script defer src="../main.js?v=20261008a"></script>
 </body>
 </html>
