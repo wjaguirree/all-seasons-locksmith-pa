@@ -8,10 +8,15 @@
 /* Hero: min-height only, never full viewport height. Clears the fixed nav. */
 .hero.hero--alt {
   height: auto;
-  min-height: 680px;
+  min-height: 740px;
   padding-top: 7.5rem;
   padding-bottom: 6rem;
 }
+/* More vertical room between hero elements */
+.hero.hero--alt .hero-title { margin-top: 0.5rem; }
+.hero.hero--alt .hero-sub { margin-top: 1.75rem; }
+.hero.hero--alt .hero-actions { margin-top: 2.25rem; }
+.hero.hero--alt .hero-badge { margin-top: 1.5rem; }
 
 /* Section backgrounds */
 .alt-section--tint { background: var(--bg-2); }
