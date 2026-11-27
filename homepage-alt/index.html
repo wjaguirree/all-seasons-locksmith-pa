@@ -387,7 +387,9 @@
           <p class="eyebrow">Recent work</p>
           <h2 class="section-title" id="work-title">Harrisburg Locksmith <span class="accent">Jobs We've Done</span></h2>
         </header>
-        <ul class="alt-work-grid" data-reveal>
+      </div>
+      <div class="alt-work-slider" data-slider data-reveal>
+        <ul class="alt-work-track">
           <li class="alt-work-item">
             <figure>
               <img src="../assets/img/work/automotive-01-jeep-key-programmed-engine-running.webp?v=20260906b" alt="Car key fob programmed for a Jeep by a Harrisburg locksmith" width="675" height="900" loading="lazy" decoding="async" />
@@ -677,5 +679,33 @@
   <script defer src="../lib/ScrollTrigger.min.js"></script>
   <script defer src="../lib/manifest.js"></script>
   <script defer src="../main.js?v=20261008a"></script>
+  <script>
+  /* Recent work: endless horizontal slider that slows on hover, click or tap pauses it.
+     Without JS, or with reduced motion, the row simply scrolls by hand. */
+  (function () {
+    var box = document.querySelector('[data-slider]');
+    if (!box || !box.animate || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var track = box.firstElementChild;
+    Array.prototype.slice.call(track.children).forEach(function (li) {
+      var copy = li.cloneNode(true);
+      copy.setAttribute('aria-hidden', 'true');
+      track.appendChild(copy);
+    });
+    box.classList.add('is-sliding');
+    var anim = track.animate(
+      [{ transform: 'translateX(0)' }, { transform: 'translateX(-50%)' }],
+      { duration: 35000, iterations: Infinity }
+    );
+    box.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') anim.updatePlaybackRate(0.3); });
+    box.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') anim.updatePlaybackRate(1); });
+    box.addEventListener('click', function () { if (anim.playState === 'paused') anim.play(); else anim.pause(); });
+    /* load every photo once the row is close, so none pop in while sliding */
+    if (window.IntersectionObserver) new IntersectionObserver(function (entries, io) {
+      if (!entries[0].isIntersecting) return;
+      track.querySelectorAll('img').forEach(function (img) { img.loading = 'eager'; });
+      io.disconnect();
+    }, { rootMargin: '600px 0px' }).observe(box);
+  })();
+  </script>
 </body>
 </html>
