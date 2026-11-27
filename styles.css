@@ -1070,10 +1070,10 @@ html.menu-open { overflow: hidden; }
 /* =============================================================
    21. Breadcrumb
    ============================================================= */
-.crumb { background: var(--bg-2); border-bottom: 1px solid var(--line); padding-top: 5.4rem; }
+/* Sits inside the page hero, above the eyebrow */
+.crumb { grid-column: 1 / -1; margin-bottom: 1.6rem; }
 .crumb-inner {
   display: flex; align-items: center; gap: .55rem; flex-wrap: wrap;
-  padding-block: .95rem;
   font-family: var(--mono); font-size: .7rem; letter-spacing: .14em;
   text-transform: uppercase; color: var(--ink-mute);
 }
