@@ -201,20 +201,21 @@
 .alt-body strong { color: var(--ink); font-weight: 600; }
 
 /* ---------- Guide section: site photo behind the copy ----------
-   Uses the existing about.webp from the site. A dark gradient covers the left
-   side so the copy keeps AA contrast; the van and technician show on the right. */
-.alt-section--photo {
-  background:
-    linear-gradient(180deg, rgba(11, 18, 32, 0.9) 0%, rgba(11, 18, 32, 0.84) 50%, rgba(11, 18, 32, 0.94) 100%),
-    url("../assets/img/about.webp") center 30% / cover no-repeat,
-    var(--bg-2);
+   The photo is a real <img> (so it carries alt text) layered under a dark
+   gradient that keeps AA contrast for the copy. */
+.alt-section--photo { isolation: isolate; background: var(--bg-2); }
+.alt-section--photo .alt-photo-bg {
+  position: absolute; inset: 0; z-index: -2;
+  width: 100%; height: 100%; object-fit: cover; object-position: center 30%;
+}
+.alt-section--photo::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(180deg, rgba(11, 18, 32, 0.9) 0%, rgba(11, 18, 32, 0.84) 50%, rgba(11, 18, 32, 0.94) 100%);
 }
 @media (max-width: 759px) {
-  .alt-section--photo {
-    background:
-      linear-gradient(180deg, rgba(11, 18, 32, 0.92) 0%, rgba(11, 18, 32, 0.96) 100%),
-      url("../assets/img/about.webp") center / cover no-repeat,
-      var(--bg-2);
+  .alt-section--photo .alt-photo-bg { object-position: center; }
+  .alt-section--photo::after {
+    background: linear-gradient(180deg, rgba(11, 18, 32, 0.92) 0%, rgba(11, 18, 32, 0.96) 100%);
   }
 }
 
