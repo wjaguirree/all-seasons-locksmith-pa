@@ -442,10 +442,17 @@
   function initHeroParallax() {
     if (reduced || !window.gsap || !window.ScrollTrigger) return;
     var media = $("[data-hero-media]");
-    if (media) {
+    var hero = $(".hero");
+    if (media && hero) {
+      // The hero starts at the top of the page, so give plain scroll positions.
+      // Measured positions ("top top") come out wrong when ScrollTrigger refreshes
+      // mid-page with CSS smooth scrolling on, leaving a gap above the image.
       window.gsap.to(media, {
         yPercent: 18, ease: "none",
-        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
+        scrollTrigger: {
+          trigger: hero, scrub: true,
+          start: 0, end: function () { return hero.offsetHeight; }
+        }
       });
     }
   }
