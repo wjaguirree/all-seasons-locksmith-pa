@@ -1,7 +1,7 @@
-/* Homepage alt: additions to the live styles.css.
+/* Homepage: additions to styles.css.
    Shell, hero structure, trust bar, section heads, buttons, and footer all come
-   from ../styles.css so the alt matches the main homepage. This file adds the
-   sections the live homepage does not have, using the live tokens only
+   from ../styles.css so the homepage matches the rest of the site. This file adds the
+   homepage-only sections, using the site tokens only
    (--ink, --ink-2, --ink-mute, --line, --bg-2, --bg-3, --brass, --brass-2,
    --brass-3, --brass-glow, --display, --mono, --ease-out). No new hues. */
 
