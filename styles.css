@@ -893,8 +893,10 @@ h1, h2, h3, h4 {
 .footer-base {
   border-top: 1px solid var(--line);
   padding-block: 1.6rem;
-  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;
+  text-align: center;
 }
+.footer-base > * { flex-basis: 100%; }
 .footer-base p { font-size: 0.78rem; color: var(--ink-faint); }
 .footer-demo { color: var(--brass); opacity: 0.7; }
 
