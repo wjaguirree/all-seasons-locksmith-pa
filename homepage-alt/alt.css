@@ -89,7 +89,7 @@
 }
 .alt-stats dd {
   margin: 0.75rem 0 0; color: var(--ink-mute);
-  font-family: var(--mono); font-size: 0.72rem;
+  font-family: var(--mono); font-size: 0.74rem;
   letter-spacing: 0.22em; text-transform: uppercase;
 }
 
@@ -124,7 +124,7 @@
   padding-right: 0.9rem;
   background: var(--bg-2);
   color: var(--brass-3);
-  font-family: var(--mono); font-size: 0.95rem; font-weight: 500;
+  font-family: var(--mono); font-size: 0.82rem; letter-spacing: 0.15em;
   line-height: 1.2;
 }
 
@@ -175,7 +175,7 @@
 }
 .alt-county-grid .alt-card h3 { margin-bottom: 0.35rem; }
 .alt-county-meta {
-  font-family: var(--mono); font-size: 0.72rem;
+  font-family: var(--mono); font-size: 0.74rem;
   letter-spacing: 0.22em; text-transform: uppercase;
   color: var(--ink-mute); margin: 0;
 }
@@ -186,7 +186,7 @@
 .alt-city {
   display: inline-block; padding: 0.45rem 0.9rem;
   border: 1px solid var(--line-2); border-radius: 999px;
-  color: var(--ink-2); font-size: 0.9rem; line-height: 1.3;
+  color: var(--ink-2); font-size: 0.86rem; line-height: 1.3;
   text-decoration: none;
   transition: border-color 0.3s var(--ease-out), color 0.3s var(--ease-out), background 0.3s var(--ease-out);
 }
@@ -207,8 +207,7 @@
 .alt-final .section-title { margin-bottom: 0; }
 .alt-final .section-lead { margin-inline: auto; }
 .alt-note {
-  color: var(--ink-mute); font-size: 0.85rem; max-width: 52ch;
-  font-family: var(--mono); letter-spacing: 0.02em;
+  color: var(--ink-mute); font-size: 0.92rem; max-width: 52ch;
 }
 
 /* ---------- Layout breakpoints ---------- */
@@ -229,7 +228,7 @@
 /* ---------- Body copy under the problem heading ---------- */
 .alt-body {
   max-width: 84ch; margin: 2.75rem auto 3.5rem; text-align: center;
-  color: var(--ink-2); line-height: 1.7;
+  color: var(--ink-2); line-height: 1.65;
 }
 .alt-body p + p { margin-top: 1.9rem; }
 .alt-body strong { color: var(--ink); font-weight: 600; }
