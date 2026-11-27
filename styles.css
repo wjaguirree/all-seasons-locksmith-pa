@@ -1204,6 +1204,21 @@ html.menu-open { overflow: hidden; }
   .nav-logo-chip { padding: 4px 9px; border-radius: 11px; }
   .nav-logo { height: 52px; }
 }
+/* Header shrinks once the page is scrolled (main.js adds .is-scrolled) */
+.nav-inner, .nav-logo, .nav-logo-chip, .nav-cta {
+  transition: padding .3s var(--ease-out), height .3s var(--ease-out), border-radius .3s var(--ease-out),
+              border-color .3s var(--ease-out), background-color .3s var(--ease-out), transform .4s var(--ease-out);
+}
+.nav.is-scrolled { padding-block: 0.1rem; }
+.nav.is-scrolled .nav-inner { padding-block: 0.3rem; }
+.nav.is-scrolled .nav-logo-chip { padding: 3px 8px; border-radius: 10px; }
+.nav.is-scrolled .nav-logo { height: 44px; }
+.nav.is-scrolled .nav-cta { padding-block: 0.3rem; }
+@media (max-width: 539px) {
+  .nav.is-scrolled .nav-logo-chip { padding: 2px 6px; border-radius: 9px; }
+  .nav.is-scrolled .nav-logo { height: 40px; }
+}
+@media (prefers-reduced-motion: reduce) { .nav, .nav-inner, .nav-logo, .nav-logo-chip, .nav-cta { transition: none; } }
 .nav-brand-text strong { font-family: var(--slab); font-weight: 700; letter-spacing: 0.01em; }
 .nav-brand-text .wm-1 { color: var(--red); }
 .nav-brand-text em { color: var(--olive-3); }
