@@ -1071,7 +1071,8 @@ html.menu-open { overflow: hidden; }
    21. Breadcrumb
    ============================================================= */
 /* Sits inside the page hero, above the eyebrow */
-.crumb { margin-bottom: 1.6rem; }
+.crumb { margin: 1.5rem 0 1.6rem; }
+@media (max-width: 539px) { .crumb { margin-top: 0.5rem; } }
 .crumb-inner {
   display: flex; align-items: center; gap: .55rem; flex-wrap: wrap;
   font-family: var(--mono); font-size: .7rem; letter-spacing: .14em;
