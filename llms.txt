@@ -30,5 +30,6 @@
 - [Service areas](https://allseasonslocksmith.com/service-areas/)
 - [About](https://allseasonslocksmith.com/about/)
 - [FAQ](https://allseasonslocksmith.com/faq/)
+- [Contact](https://allseasonslocksmith.com/contact/)
 - [Blog](https://allseasonslocksmith.com/blog/)
 - [Sitemap](https://allseasonslocksmith.com/sitemap.xml)
