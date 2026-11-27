@@ -297,3 +297,7 @@
 
 /* Hero call button: hidden where the bottom bar already offers Call Now */
 @media (max-width: 959px) { .hero.hero--alt .hero-actions .btn-primary { display: none; } }
+
+/* Mobile and tablet: start the hero text just under the logo, not at the bottom
+   of a tall hero */
+@media (max-width: 959px) { .hero.hero--alt { min-height: 0; padding-top: 7.5rem; padding-bottom: 3rem; } }
