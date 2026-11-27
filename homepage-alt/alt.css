@@ -22,6 +22,12 @@
 }
 .hero.hero--alt .hero-inner > * { margin: 0; }
 
+/* ---------- Trust bar labels: plain text styled like the live headings ---------- */
+.trust-item p.trust-title {
+  font-size: 1rem; color: var(--ink); font-weight: 600;
+  line-height: 1.05; letter-spacing: -0.01em; text-wrap: balance;
+}
+
 /* ---------- Section backgrounds ---------- */
 .alt-section { position: relative; }
 .alt-section--tint {
@@ -69,7 +75,6 @@
   font-family: var(--display); font-weight: 700; font-size: 1.15rem;
   letter-spacing: -0.01em; color: var(--ink); margin-bottom: 0.7rem; line-height: 1.25;
 }
-.alt-card h3 .accent { margin-right: 0.45rem; }
 .alt-card p { color: var(--ink-mute); line-height: 1.65; }
 
 /* ---------- Guide stats: divided, numbers as the focal point ---------- */
@@ -129,12 +134,6 @@
 }
 
 /* ---------- Stakes ---------- */
-.alt-card .accent {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 22px; height: 22px; border-radius: 999px;
-  border: 1px solid rgba(201, 162, 74, 0.5);
-  font-size: 0.7rem; line-height: 1; vertical-align: 0.1em;
-}
 .alt-contrast {
   color: var(--ink-2); max-width: 60ch; line-height: 1.65;
   margin: 2.5rem auto 0; text-align: center;
