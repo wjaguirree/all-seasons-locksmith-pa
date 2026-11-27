@@ -136,12 +136,8 @@
   font-size: 0.7rem; line-height: 1; vertical-align: 0.1em;
 }
 .alt-contrast {
-  color: var(--ink); max-width: 60ch; line-height: 1.65;
+  color: var(--ink-2); max-width: 60ch; line-height: 1.65;
   margin: 2.5rem auto 0; text-align: center;
-  padding: 1.25rem 1.5rem;
-  border-left: 3px solid var(--brass);
-  background: rgba(20, 31, 50, 0.45);
-  border-radius: 0 12px 12px 0;
 }
 
 /* ---------- Promise: check-marked list ---------- */
