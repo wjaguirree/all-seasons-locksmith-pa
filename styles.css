@@ -885,6 +885,7 @@ h1, h2, h3, h4 {
 .footer-col a { transition: color .3s var(--ease-out); }
 .footer-col a:hover { color: var(--brass); }
 .footer-hours li { display: flex; justify-content: space-between; gap: 1rem; }
+.footer-hours span { white-space: nowrap; }
 .footer-hours span:last-child { color: var(--ink-mute); }
 .footer-contact { font-style: normal; display: grid; gap: 0.7rem; }
 .footer-contact a { color: var(--brass-3); font-weight: 600; font-size: 1.05rem; }
@@ -959,7 +960,12 @@ figure[data-reveal].is-revealed { transform: none; }
 
 @media (min-width: 1024px) {
   .svc-grid { grid-template-columns: repeat(4, 1fr); }
-  .footer-grid { grid-template-columns: 1.4fr repeat(4, 1fr); }
+  .footer-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Five columns only where the hours column has room to stay on one line */
+@media (min-width: 1200px) {
+  .footer-grid { grid-template-columns: 1.3fr repeat(3, 1fr) minmax(250px, 1.3fr); }
 }
 
 @media (min-width: 1280px) {
