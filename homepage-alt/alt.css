@@ -247,3 +247,21 @@
       var(--bg-2);
   }
 }
+
+/* ---------- Request form + FAQ: centered column, gold accents ----------
+   styles.css hardcodes olive tints on these two; swap them for the brass tones. */
+.alt-narrow { max-width: 760px; margin-inline: auto; }
+.alt-narrow.estimate-tool { position: relative; overflow: hidden; }
+.alt-narrow.estimate-tool::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--brass), var(--brass-3) 60%, transparent);
+  opacity: 0.85;
+}
+#request .est-step-n,
+#request .est-success-check { background: rgba(201, 162, 74, 0.14); }
+#request .est-opt:hover { border-color: rgba(201, 162, 74, 0.5); }
+#request .est-opt.is-active { border-color: var(--brass); background: rgba(201, 162, 74, 0.12); }
+#request .est-note-box { border-color: rgba(201, 162, 74, 0.3); background: rgba(201, 162, 74, 0.07); }
+#faq .faq-item { background: linear-gradient(180deg, var(--bg-3), var(--bg-2)); }
+#faq .faq-item[open] { border-color: rgba(201, 162, 74, 0.45); }
