@@ -290,6 +290,7 @@
 /* Guide section: space above the About link */
 #guide .section-lead + p { margin-top: 1.25rem; }
 
-/* Hero headline: "Harrisburg PA" on its own line, never split */
-.hero--alt .hero-title .accent { display: block; white-space: nowrap; }
-.hero.hero--alt .hero-title { font-size: clamp(2.1rem, 4.5vw, 4.25rem); }
+/* Hero headline: "Locksmith Harrisburg PA" always on one line. The size follows
+   the screen width so the line also fits narrow phones. */
+.hero-line { display: block; white-space: nowrap; }
+.hero.hero--alt .hero-title { font-size: clamp(1.4rem, 7vw, 4.25rem); max-width: none; }
