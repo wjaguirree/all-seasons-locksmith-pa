@@ -276,3 +276,13 @@
   .alt-work-item img { transition: none; }
   .alt-work-item figure:hover img { transform: none; }
 }
+
+/* ---------- Blog cards: whole card is clickable through the title link ---------- */
+.alt-post-tag {
+  display: block; margin-bottom: 0.75rem;
+  font-family: var(--mono); font-size: 0.74rem;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass);
+}
+.alt-post h3 a { color: inherit; text-decoration: none; transition: color 0.3s var(--ease-out); }
+.alt-post h3 a::after { content: ""; position: absolute; inset: 0; }
+.alt-post:hover h3 a, .alt-post h3 a:focus-visible { color: var(--brass-3); }
