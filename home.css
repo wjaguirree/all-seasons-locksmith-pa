@@ -294,3 +294,6 @@
    the screen width so the line also fits narrow phones. */
 .hero-line { display: block; white-space: nowrap; }
 .hero.hero--alt .hero-title { font-size: clamp(1.4rem, 7vw, 4.25rem); max-width: none; }
+
+/* Hero call button: hidden where the bottom bar already offers Call Now */
+@media (max-width: 959px) { .hero.hero--alt .hero-actions .btn-primary { display: none; } }
