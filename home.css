@@ -1,0 +1,263 @@
+/* Homepage: additions to styles.css.
+   Shell, hero structure, trust bar, section heads, buttons, and footer all come
+   from ../styles.css so the homepage matches the rest of the site. This file adds the
+   homepage-only sections, using the site tokens only
+   (--ink, --ink-2, --ink-mute, --line, --bg-2, --bg-3, --brass, --brass-2,
+   --brass-3, --brass-glow, --display, --mono, --ease-out). No new hues. */
+
+/* ---------- Hero: min-height only, never full viewport height ---------- */
+.hero.hero--alt {
+  height: auto;
+  min-height: 820px;
+  padding-top: 7.5rem;
+  padding-bottom: 6rem;
+}
+/* One vertical rhythm for the hero text: a single grid gap between every element.
+   Live styles.css sets different margins per element (1.6rem, 1.8rem, 2rem, 2.6rem),
+   so the child margins are reset here and the grid gap does the spacing. */
+.hero.hero--alt .hero-inner {
+  display: grid;
+  gap: 1.75rem;
+  justify-items: start;
+}
+.hero.hero--alt .hero-inner > * { margin: 0; }
+
+/* ---------- Trust bar labels: plain text styled like the live headings ---------- */
+.trust-item p.trust-title {
+  font-size: 1rem; color: var(--ink); font-weight: 600;
+  line-height: 1.05; letter-spacing: -0.01em; text-wrap: balance;
+}
+
+/* ---------- Section backgrounds ---------- */
+.alt-section { position: relative; }
+.alt-section--tint {
+  background:
+    radial-gradient(70% 60% at 85% 0%, var(--brass-glow), transparent 70%),
+    var(--bg-2);
+}
+.alt-section--final {
+  background:
+    radial-gradient(60% 90% at 50% 0%, var(--brass-glow), transparent 70%),
+    var(--bg-3);
+  border-top: 1px solid var(--line);
+}
+
+/* ---------- Problem + stakes cards ---------- */
+.alt-problem-grid {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; gap: 1.25rem; grid-template-columns: 1fr;
+}
+.alt-card {
+  position: relative;
+  background: linear-gradient(180deg, var(--bg-3), var(--bg-2));
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 1.9rem 1.6rem 1.7rem;
+  overflow: hidden;
+  transition:
+    transform 0.5s var(--ease-out),
+    border-color 0.4s var(--ease-out),
+    box-shadow 0.5s var(--ease-out);
+}
+/* Brass top rule, drawn as a pseudo-element so it reads as a finish, not a border */
+.alt-card::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--brass), var(--brass-3) 60%, transparent);
+  opacity: 0.85;
+}
+.alt-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(201, 162, 74, 0.45);
+  box-shadow: 0 18px 40px -22px rgba(201, 162, 74, 0.45);
+}
+.alt-card h3 {
+  font-family: var(--display); font-weight: 700; font-size: 1.15rem;
+  letter-spacing: -0.01em; color: var(--ink); margin-bottom: 0.7rem; line-height: 1.25;
+}
+.alt-card p { color: var(--ink-mute); line-height: 1.65; }
+
+/* ---------- Guide stats: divided, numbers as the focal point ---------- */
+.alt-stats {
+  display: grid; gap: 1.25rem; grid-template-columns: 1fr;
+  margin: 3rem 0 0; padding: 2.25rem 0 0;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+.alt-stats > div { padding: 0.5rem 0; }
+.alt-stats dt {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(2.75rem, 5.5vw, 3.75rem);
+  line-height: 1; letter-spacing: -0.02em;
+  background: linear-gradient(180deg, var(--brass-3), var(--brass-2));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.alt-stats dd {
+  margin: 0.75rem 0 0; color: var(--ink-mute);
+  font-family: var(--mono); font-size: 0.74rem;
+  letter-spacing: 0.22em; text-transform: uppercase;
+}
+
+/* ---------- Plan: horizontal timeline ----------
+   The sequence is the structure: each step hangs off one brass rule, and the
+   numeral sits on that rule. No card boxes, no rings. */
+.alt-steps {
+  list-style: none; padding: 0; margin: 0 0 3rem;
+  display: grid; gap: 2.5rem; grid-template-columns: 1fr;
+}
+.alt-steps li {
+  position: relative;
+  padding-top: 2.4rem;
+}
+.alt-steps h3 {
+  font-family: var(--display); font-weight: 700; font-size: 1.2rem;
+  letter-spacing: -0.01em; color: var(--ink); margin-bottom: 0.6rem;
+}
+.alt-steps p { color: var(--ink-2); line-height: 1.65; max-width: 34ch; }
+.alt-steps a { color: var(--brass-3); font-weight: 600; text-decoration: none; }
+.alt-steps a:hover { text-decoration: underline; }
+/* The timeline rule for each step */
+.alt-steps li::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--brass), rgba(201, 162, 74, 0.15));
+}
+/* Numeral sits on the rule, left-aligned, with a background so the rule breaks cleanly behind it */
+.alt-step-num {
+  position: absolute; top: -0.6rem; left: 0;
+  padding-right: 0.9rem;
+  background: var(--bg-2);
+  color: var(--brass-3);
+  font-family: var(--mono); font-size: 0.82rem; letter-spacing: 0.15em;
+  line-height: 1.2;
+}
+
+/* ---------- Stakes ---------- */
+.alt-contrast {
+  color: var(--ink-2); max-width: 60ch; line-height: 1.65;
+  margin: 2.5rem auto 0; text-align: center;
+}
+
+/* ---------- Promise: check-marked list ---------- */
+.alt-promise-grid {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; gap: 1.5rem; grid-template-columns: 1fr;
+}
+.alt-promise-grid li {
+  position: relative;
+  border-top: 1px solid var(--line);
+  padding: 1.4rem 0 0 2.2rem;
+}
+.alt-promise-grid li::before {
+  content: "";
+  position: absolute; left: 0; top: 1.5rem;
+  width: 14px; height: 8px;
+  border-left: 2px solid var(--brass-3);
+  border-bottom: 2px solid var(--brass-3);
+  transform: rotate(-45deg);
+}
+.alt-promise-grid h3 {
+  font-family: var(--display); font-weight: 700; font-size: 1.1rem;
+  letter-spacing: -0.01em; color: var(--brass-3); margin-bottom: 0.45rem;
+}
+.alt-promise-grid p { color: var(--ink-2); line-height: 1.65; }
+
+/* ---------- Centered CTA row ---------- */
+.alt-center { text-align: center; margin-top: 2.25rem; }
+
+/* ---------- Final CTA block ---------- */
+.alt-final {
+  display: grid; justify-items: center; text-align: center; gap: 1.1rem;
+}
+.alt-final .section-title { margin-bottom: 0; }
+.alt-final .section-lead { margin-inline: auto; }
+.alt-note {
+  color: var(--ink-mute); font-size: 0.85rem; max-width: 52ch;
+  font-family: var(--mono); letter-spacing: 0.02em;
+}
+
+/* ---------- Layout breakpoints ---------- */
+@media (min-width: 760px) {
+  .alt-problem-grid { grid-template-columns: repeat(3, 1fr); }
+  .alt-stats { grid-template-columns: repeat(2, 1fr); }
+  .alt-stats > div + div { border-left: 1px solid var(--line); }
+  .alt-steps { grid-template-columns: repeat(3, 1fr); gap: 3rem; }
+  .alt-promise-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---------- Motion preference ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .alt-card { transition: none; }
+  .alt-card:hover { transform: none; }
+}
+
+/* ---------- Body copy under the problem heading ---------- */
+.alt-body {
+  max-width: 84ch; margin: 2.75rem auto 3.5rem; text-align: center;
+  color: var(--ink-2); line-height: 1.65;
+}
+.alt-body p + p { margin-top: 1.9rem; }
+.alt-body strong { color: var(--ink); font-weight: 600; }
+
+/* ---------- Guide section: site photo behind the copy ----------
+   The photo is a real <img> (so it carries alt text) layered under a dark
+   gradient that keeps AA contrast for the copy. */
+.alt-section--photo { isolation: isolate; background: var(--bg-2); }
+.alt-section--photo .alt-photo-bg {
+  position: absolute; inset: 0; z-index: -2;
+  width: 100%; height: 100%; object-fit: cover; object-position: center 30%;
+}
+.alt-section--photo::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(180deg, rgba(11, 18, 32, 0.9) 0%, rgba(11, 18, 32, 0.84) 50%, rgba(11, 18, 32, 0.94) 100%);
+}
+@media (max-width: 759px) {
+  .alt-section--photo .alt-photo-bg { object-position: center; }
+  .alt-section--photo::after {
+    background: linear-gradient(180deg, rgba(11, 18, 32, 0.92) 0%, rgba(11, 18, 32, 0.96) 100%);
+  }
+}
+
+/* ---------- Request form + FAQ: centered column, gold accents ----------
+   styles.css hardcodes olive tints on these two; swap them for the brass tones. */
+.alt-narrow { max-width: 760px; margin-inline: auto; }
+.alt-narrow.estimate-tool { position: relative; overflow: hidden; }
+.alt-narrow.estimate-tool::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--brass), var(--brass-3) 60%, transparent);
+  opacity: 0.85;
+}
+#request .est-step-n,
+#request .est-success-check { background: rgba(201, 162, 74, 0.14); }
+#request .est-opt:hover { border-color: rgba(201, 162, 74, 0.5); }
+#request .est-opt.is-active { border-color: var(--brass); background: rgba(201, 162, 74, 0.12); }
+#request .est-note-box { border-color: rgba(201, 162, 74, 0.3); background: rgba(201, 162, 74, 0.07); }
+#faq .faq-item { background: linear-gradient(180deg, var(--bg-3), var(--bg-2)); }
+#faq .faq-item[open] { border-color: rgba(201, 162, 74, 0.45); }
+
+/* ---------- Blog cards: whole card is clickable through the title link ---------- */
+.alt-post-tag {
+  display: block; margin-bottom: 0.75rem;
+  font-family: var(--mono); font-size: 0.74rem;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass);
+}
+.alt-post h3 a { color: inherit; text-decoration: none; transition: color 0.3s var(--ease-out); }
+.alt-post h3 a::after { content: ""; position: absolute; inset: 0; }
+.alt-post:hover h3 a, .alt-post h3 a:focus-visible { color: var(--brass-3); }
+
+/* Guide section: space above the About link */
+#guide .section-lead + p { margin-top: 1.25rem; }
+
+/* Hero headline: "Locksmith Harrisburg PA" always on one line. The size follows
+   the screen width so the line also fits narrow phones. */
+.hero-line { display: block; white-space: nowrap; }
+.hero.hero--alt .hero-title { font-size: clamp(1.4rem, 7vw, 4.25rem); max-width: none; }
+
+/* Hero call button: hidden where the bottom bar already offers Call Now */
+@media (max-width: 959px) { .hero.hero--alt .hero-actions .btn-primary { display: none; } }
+
+/* Mobile and tablet: start the hero text just under the logo, not at the bottom
+   of a tall hero */
+@media (max-width: 959px) { .hero.hero--alt { min-height: 0; padding-top: 7.5rem; padding-bottom: 3rem; } }

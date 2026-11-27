@@ -1,3 +1,5 @@
 .DS_Store
 # auto-generated claude-mem context files
 **/CLAUDE.md
+# local dev dependencies
+node_modules/

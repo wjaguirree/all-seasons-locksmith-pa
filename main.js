@@ -113,7 +113,7 @@
      actually sits: left of centre enters from the left, right of centre from
      the right, so a row of cards converges instead of all sliding one way.
      Set once per element; CSS reads it as --rv-x. */
-  var SLIDE_SEL = ".mapwrap, .area-media, .svc-card, figure, .work-item";
+  var SLIDE_SEL = ".mapwrap, .area-media, .svc-card, figure";
   function setSlideDirection(el) {
     if (el.dataset.rvDir || !el.matches || !el.matches(SLIDE_SEL)) return;
     el.dataset.rvDir = "1";
@@ -442,12 +442,48 @@
   function initHeroParallax() {
     if (reduced || !window.gsap || !window.ScrollTrigger) return;
     var media = $("[data-hero-media]");
-    if (media) {
+    var hero = $(".hero");
+    if (media && hero) {
+      // The hero starts at the top of the page, so give plain scroll positions.
+      // Measured positions ("top top") come out wrong when ScrollTrigger refreshes
+      // mid-page with CSS smooth scrolling on, leaving a gap above the image.
       window.gsap.to(media, {
         yPercent: 18, ease: "none",
-        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
+        scrollTrigger: {
+          trigger: hero, scrub: true,
+          start: 0, end: function () { return hero.offsetHeight; }
+        }
       });
     }
+  }
+
+  /* ---------- Work photos: endless horizontal slider ----------
+     Slows on hover, click or tap pauses it. Without JS, or with reduced motion,
+     the row simply scrolls by hand. */
+  function initSlider() {
+    $$("[data-slider]").forEach(function (box) {
+      if (!box.animate || reduced) return;
+      var track = box.firstElementChild;
+      $$("li", track).forEach(function (li) {
+        var copy = li.cloneNode(true);
+        copy.setAttribute("aria-hidden", "true");
+        track.appendChild(copy);
+      });
+      box.classList.add("is-sliding");
+      var anim = track.animate(
+        [{ transform: "translateX(0)" }, { transform: "translateX(-50%)" }],
+        { duration: track.children.length / 2 * 4400, iterations: Infinity } /* same speed however many photos */
+      );
+      box.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") anim.updatePlaybackRate(0.3); });
+      box.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") anim.updatePlaybackRate(1); });
+      box.addEventListener("click", function () { if (anim.playState === "paused") anim.play(); else anim.pause(); });
+      /* load every photo once the row is close, so none pop in while sliding */
+      if (window.IntersectionObserver) new IntersectionObserver(function (entries, io) {
+        if (!entries[0].isIntersecting) return;
+        $$("img", track).forEach(function (img) { img.loading = "eager"; });
+        io.disconnect();
+      }, { rootMargin: "600px 0px" }).observe(box);
+    });
   }
 
   /* ---------- boot ---------- */
@@ -460,6 +496,7 @@
     safe(initCounters, "initCounters");
     safe(initTilt, "initTilt");
     safe(initFaq, "initFaq");
+    safe(initSlider, "initSlider");
     safe(initEstimate, "initEstimate");
 
     if (window.gsap && window.ScrollTrigger) {

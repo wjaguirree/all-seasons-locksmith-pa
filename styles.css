@@ -885,6 +885,7 @@ h1, h2, h3, h4 {
 .footer-col a { transition: color .3s var(--ease-out); }
 .footer-col a:hover { color: var(--brass); }
 .footer-hours li { display: flex; justify-content: space-between; gap: 1rem; }
+.footer-hours span { white-space: nowrap; }
 .footer-hours span:last-child { color: var(--ink-mute); }
 .footer-contact { font-style: normal; display: grid; gap: 0.7rem; }
 .footer-contact a { color: var(--brass-3); font-weight: 600; font-size: 1.05rem; }
@@ -892,8 +893,10 @@ h1, h2, h3, h4 {
 .footer-base {
   border-top: 1px solid var(--line);
   padding-block: 1.6rem;
-  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;
+  text-align: center;
 }
+.footer-base > * { flex-basis: 100%; }
 .footer-base p { font-size: 0.78rem; color: var(--ink-faint); }
 .footer-demo { color: var(--brass); opacity: 0.7; }
 
@@ -948,7 +951,7 @@ figure[data-reveal].is-revealed { transform: none; }
   .why-grid { grid-template-columns: repeat(3, 1fr); }
   .reviews-grid { grid-template-columns: repeat(3, 1fr); }
 
-  .area-grid { grid-template-columns: 0.85fr 1.15fr; gap: 4rem; }
+  .area-grid { grid-template-columns: 0.85fr 1.15fr; gap: 4rem; align-items: start; }
   .estimate-shell { grid-template-columns: 0.8fr 1.2fr; gap: 4rem; }
   .estimate-shell .section-head { position: sticky; top: 7rem; }
   .faq-shell { grid-template-columns: 0.85fr 1.15fr; gap: 4rem; }
@@ -959,7 +962,12 @@ figure[data-reveal].is-revealed { transform: none; }
 
 @media (min-width: 1024px) {
   .svc-grid { grid-template-columns: repeat(4, 1fr); }
-  .footer-grid { grid-template-columns: 1.4fr repeat(4, 1fr); }
+  .footer-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Five columns only where the hours column has room to stay on one line */
+@media (min-width: 1200px) {
+  .footer-grid { grid-template-columns: 1.3fr repeat(3, 1fr) minmax(250px, 1.3fr); }
 }
 
 @media (min-width: 1280px) {
@@ -991,9 +999,18 @@ figure[data-reveal].is-revealed { transform: none; }
   margin-top: 1rem; font-size: 0.82rem; color: var(--brass-3);
   border-left: 2px solid var(--red); padding-left: 0.7rem;
 }
-.footer-contact-line { font-style: normal; display: block; margin-bottom: 0.5rem; }
+.footer-contact-line {
+  font-style: normal; margin-bottom: 0.5rem;
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline;
+}
 .footer-contact-line a { color: var(--brass-3); font-weight: 600; }
 .footer-contact-line span { color: var(--ink-mute); font-size: 0.85rem; }
+/* Dots are drawn by CSS so they can be dropped when the items stack */
+.footer-contact-line span::before { content: "\00B7" / ""; margin-inline: 0.6em; }
+@media (max-width: 759px) {
+  .footer-contact-line { flex-direction: column; align-items: center; gap: 0.35rem; }
+  .footer-contact-line span::before { content: none; }
+}
 
 .area-photo { width: 100%; height: 100%; min-height: 340px; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--line); }
 
@@ -1022,18 +1039,7 @@ figure[data-reveal].is-revealed { transform: none; }
 @media (min-width: 960px) { .mobile-menu { display: none; } }
 html.menu-open { overflow: hidden; }
 
-/* ===== Sticky mobile "Call now" bar ===== */
-.callbar {
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
-  display: flex; gap: 0.6rem; padding: 0.55rem;
-  background: rgba(16,19,15,0.94); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
-  border-top: 1px solid var(--line-2);
-}
-.callbar a { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem; padding: 0.95rem; border-radius: 999px; font-weight: 700; font-size: 1rem; }
-.callbar .cb-call { background: linear-gradient(180deg, var(--red), var(--red-2)); color: #241a05; }
-.callbar .cb-quote { border: 1px solid var(--line-2); color: var(--ink); }
-@media (min-width: 720px) { .callbar { display: none; } }
-@media (max-width: 719px) { body { padding-bottom: 76px; } .nav-cta { display: none; } }
+@media (max-width: 719px) { .nav-cta { display: none; } }
 
 /* ===== In-text internal links (auto-linked service keywords) ===== */
 .tlink {
@@ -1064,10 +1070,11 @@ html.menu-open { overflow: hidden; }
 /* =============================================================
    21. Breadcrumb
    ============================================================= */
-.crumb { background: var(--bg-2); border-bottom: 1px solid var(--line); padding-top: 5.4rem; }
+/* Sits inside the page hero, above the eyebrow */
+.crumb { margin: 1.5rem 0 1.6rem; }
+@media (max-width: 539px) { .crumb { margin-top: 0.5rem; } }
 .crumb-inner {
   display: flex; align-items: center; gap: .55rem; flex-wrap: wrap;
-  padding-block: .95rem;
   font-family: var(--mono); font-size: .7rem; letter-spacing: .14em;
   text-transform: uppercase; color: var(--ink-mute);
 }
@@ -1198,6 +1205,21 @@ html.menu-open { overflow: hidden; }
   .nav-logo-chip { padding: 4px 9px; border-radius: 11px; }
   .nav-logo { height: 52px; }
 }
+/* Header shrinks once the page is scrolled (main.js adds .is-scrolled) */
+.nav-inner, .nav-logo, .nav-logo-chip, .nav-cta {
+  transition: padding .3s var(--ease-out), height .3s var(--ease-out), border-radius .3s var(--ease-out),
+              border-color .3s var(--ease-out), background-color .3s var(--ease-out), transform .4s var(--ease-out);
+}
+.nav.is-scrolled { padding-block: 0.1rem; }
+.nav.is-scrolled .nav-inner { padding-block: 0.3rem; }
+.nav.is-scrolled .nav-logo-chip { padding: 3px 8px; border-radius: 10px; }
+.nav.is-scrolled .nav-logo { height: 44px; }
+.nav.is-scrolled .nav-cta { padding-block: 0.3rem; }
+@media (max-width: 539px) {
+  .nav.is-scrolled .nav-logo-chip { padding: 2px 6px; border-radius: 9px; }
+  .nav.is-scrolled .nav-logo { height: 40px; }
+}
+@media (prefers-reduced-motion: reduce) { .nav, .nav-inner, .nav-logo, .nav-logo-chip, .nav-cta { transition: none; } }
 .nav-brand-text strong { font-family: var(--slab); font-weight: 700; letter-spacing: 0.01em; }
 .nav-brand-text .wm-1 { color: var(--red); }
 .nav-brand-text em { color: var(--olive-3); }
@@ -1247,18 +1269,29 @@ html.menu-open { overflow: hidden; }
 /* =============================================================
    31. Mobile sticky call bar
    ============================================================= */
+/* Two flat halves, edge to edge: call on the left, request on the right */
 .callbar {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 120;
-  display: none; align-items: center; justify-content: center; gap: .6rem;
-  padding: .95rem 1rem;
-  background: linear-gradient(180deg, var(--red), var(--red-2));
-  color: #241a05; font-weight: 700; font-size: 1.02rem;
+  display: none; background: var(--bg-3);
   box-shadow: 0 -8px 24px -12px rgba(0,0,0,.7);
 }
-.callbar svg { width: 18px; height: 18px; }
+.callbar a {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.55rem;
+  height: calc(52px + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  font-family: var(--display); font-weight: 700; font-size: 0.95rem;
+  letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap;
+}
+.callbar a::before {
+  content: ""; flex: none; width: 18px; height: 18px; background: currentColor;
+  -webkit-mask: var(--cb-icon) center / contain no-repeat; mask: var(--cb-icon) center / contain no-repeat;
+}
+.callbar a:focus-visible { outline-offset: -4px; outline-color: currentColor; }
+.callbar .cb-call { background: var(--brass); color: var(--bg); --cb-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M5%204h4l2%205-2.5%201.5a11%2011%200%200%200%205%205L15%2013l5%202v4a2%202%200%200%201-2%202A16%2016%200%200%201%203%206a2%202%200%200%201%202-2%27/%3E%3Cpath%20d%3D%27M15%203.5a6%206%200%200%201%205.5%205.5M15%207a2.5%202.5%200%200%201%202%202%27/%3E%3C/svg%3E"); }
+.callbar .cb-quote { background: var(--bg-3); color: var(--ink); --cb-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Crect%20x%3D%275%27%20y%3D%274%27%20width%3D%2714%27%20height%3D%2717%27%20rx%3D%272%27/%3E%3Cpath%20d%3D%27M9%204V3h6v3H9V4M9%2011h6M9%2015h6%27/%3E%3C/svg%3E"); }
 @media (max-width: 959px) {
   .callbar { display: flex; }
-  body { padding-bottom: 60px; }
+  body { padding-bottom: calc(52px + env(safe-area-inset-bottom, 0px)); }
   .hero-scroll { display: none; }
 }
 
@@ -1291,55 +1324,47 @@ html.menu-open { overflow: hidden; }
 .brixel-name { font-weight: 600; letter-spacing: 0.01em; }
 
 /* =============================================================
-   19. Real work photos — the client's own job shots
-   Portrait phone photos, so the grid keeps a 3:4 frame and lets
-   object-fit do the cropping. Slides in like other media blocks
-   (the .work-item rule below is picked up by the reveal system).
+   19. Real work photos: endless horizontal slider, used on every page
+   (script: initSlider in main.js)
    ============================================================= */
-.work-shots { padding-bottom: 1rem; }
-.work-grid {
-  list-style: none;
-  margin: 1.6rem 0 0;
-  padding: 0;
-  display: grid;
-  gap: 14px;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+.work-shots { padding-bottom: 3rem; }
+/* ---------- Recent work: endless horizontal slider, uncropped 3:4 photos with captions below ---------- */
+.alt-work-slider { overflow-x: auto; }
+.alt-work-slider.is-sliding { overflow: hidden; cursor: pointer; }
+/* spacing is item padding (not gap) so a -50% shift lands exactly on the copy */
+.alt-work-track { list-style: none; padding: 0; margin: 0; display: flex; width: max-content; }
+.alt-work-item { flex: none; width: clamp(220px, 22vw, 300px); padding: 4px 16px 4px 0; }
+.alt-work-item figure {
+  position: relative; margin: 0; overflow: hidden; height: 100%;
+  display: flex; flex-direction: column;
+  border: 1px solid var(--line); border-radius: 16px; background: var(--bg-3);
+  transition: border-color 0.4s var(--ease-out), box-shadow 0.5s var(--ease-out);
 }
-.work-item {
-  margin: 0;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  overflow: hidden;
-  background: var(--surface-2, #141b2b);
-  /* Media entrance: same horizontal slide as other media blocks. */
-  transform: translateX(var(--rv-x, -40px));
+.alt-work-item figure::before {
+  content: ""; position: absolute; z-index: 1; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--brass), var(--brass-3) 60%, transparent);
 }
-.work-item.is-revealed { transform: none; }
-.work-item img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  transition: transform .6s var(--ease-soft);
+.alt-work-item img {
+  width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover;
+  transition: transform 0.6s var(--ease-out);
 }
-.work-item:hover img { transform: scale(1.04); }
-/* The lead row is the big one: three across on desktop, so six shots fill two
-   full rows instead of auto-fit leaving one orphan photo on its own line. */
-.work-grid--lead { grid-template-columns: repeat(3, 1fr); }
-/* Below it, the rest of the archive as a contact sheet. Every page carries the
-   whole set of job photos, so these tiles stay small and the section short. */
-.work-grid--wall {
-  margin-top: 14px;
-  gap: 8px;
-  grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+.alt-work-item figcaption {
+  position: relative; z-index: 1; flex: 1;
+  display: grid; align-content: start; gap: 0.25rem; padding: 0.85rem 0.9rem 0.95rem;
+  background: linear-gradient(180deg, var(--bg-3), var(--bg-2));
 }
-.work-grid--wall .work-item { border-radius: 8px; }
-@media (max-width: 560px) {
-  .work-grid, .work-grid--lead { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .work-grid--wall { grid-template-columns: repeat(3, 1fr); gap: 6px; }
-  /* An odd number of lead shots leaves a hole in the last row on a phone — let
-     the leftover photo run the full width instead, in the same 3:4 frame:
-     a wider crop threw away up to 58% of the taller phone photos. The contact
-     sheet is exempt: a giant tile in the middle of it would look broken. */
-  .work-grid:not(.work-grid--wall) > .work-item:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.alt-work-cat {
+  font-family: var(--mono); font-size: 0.66rem;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass-3);
 }
+.alt-work-job {
+  font-family: var(--display); font-weight: 600; font-size: 1.05rem;
+  line-height: 1.2; color: var(--ink);
+}
+.alt-work-item figure:hover { border-color: rgba(201, 162, 74, 0.45); box-shadow: 0 18px 40px -22px rgba(201, 162, 74, 0.45); }
+.alt-work-item figure:hover img { transform: scale(1.04); }
+@media (prefers-reduced-motion: reduce) {
+  .alt-work-item img { transition: none; }
+  .alt-work-item figure:hover img { transform: none; }
+}
+
