@@ -207,7 +207,8 @@
 .alt-final .section-title { margin-bottom: 0; }
 .alt-final .section-lead { margin-inline: auto; }
 .alt-note {
-  color: var(--ink-mute); font-size: 0.92rem; max-width: 52ch;
+  color: var(--ink-mute); font-size: 0.85rem; max-width: 52ch;
+  font-family: var(--mono); letter-spacing: 0.02em;
 }
 
 /* ---------- Layout breakpoints ---------- */
