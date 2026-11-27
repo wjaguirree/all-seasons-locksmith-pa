@@ -1324,55 +1324,47 @@ html.menu-open { overflow: hidden; }
 .brixel-name { font-weight: 600; letter-spacing: 0.01em; }
 
 /* =============================================================
-   19. Real work photos — the client's own job shots
-   Portrait phone photos, so the grid keeps a 3:4 frame and lets
-   object-fit do the cropping. Slides in like other media blocks
-   (the .work-item rule below is picked up by the reveal system).
+   19. Real work photos: endless horizontal slider, used on every page
+   (script: initSlider in main.js)
    ============================================================= */
-.work-shots { padding-bottom: 1rem; }
-.work-grid {
-  list-style: none;
-  margin: 1.6rem 0 0;
-  padding: 0;
-  display: grid;
-  gap: 14px;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+.work-shots { padding-bottom: 3rem; }
+/* ---------- Recent work: endless horizontal slider, uncropped 3:4 photos with captions below ---------- */
+.alt-work-slider { overflow-x: auto; }
+.alt-work-slider.is-sliding { overflow: hidden; cursor: pointer; }
+/* spacing is item padding (not gap) so a -50% shift lands exactly on the copy */
+.alt-work-track { list-style: none; padding: 0; margin: 0; display: flex; width: max-content; }
+.alt-work-item { flex: none; width: clamp(220px, 22vw, 300px); padding: 4px 16px 4px 0; }
+.alt-work-item figure {
+  position: relative; margin: 0; overflow: hidden; height: 100%;
+  display: flex; flex-direction: column;
+  border: 1px solid var(--line); border-radius: 16px; background: var(--bg-3);
+  transition: border-color 0.4s var(--ease-out), box-shadow 0.5s var(--ease-out);
 }
-.work-item {
-  margin: 0;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  overflow: hidden;
-  background: var(--surface-2, #141b2b);
-  /* Media entrance: same horizontal slide as other media blocks. */
-  transform: translateX(var(--rv-x, -40px));
+.alt-work-item figure::before {
+  content: ""; position: absolute; z-index: 1; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--brass), var(--brass-3) 60%, transparent);
 }
-.work-item.is-revealed { transform: none; }
-.work-item img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  transition: transform .6s var(--ease-soft);
+.alt-work-item img {
+  width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover;
+  transition: transform 0.6s var(--ease-out);
 }
-.work-item:hover img { transform: scale(1.04); }
-/* The lead row is the big one: three across on desktop, so six shots fill two
-   full rows instead of auto-fit leaving one orphan photo on its own line. */
-.work-grid--lead { grid-template-columns: repeat(3, 1fr); }
-/* Below it, the rest of the archive as a contact sheet. Every page carries the
-   whole set of job photos, so these tiles stay small and the section short. */
-.work-grid--wall {
-  margin-top: 14px;
-  gap: 8px;
-  grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+.alt-work-item figcaption {
+  position: relative; z-index: 1; flex: 1;
+  display: grid; align-content: start; gap: 0.25rem; padding: 0.85rem 0.9rem 0.95rem;
+  background: linear-gradient(180deg, var(--bg-3), var(--bg-2));
 }
-.work-grid--wall .work-item { border-radius: 8px; }
-@media (max-width: 560px) {
-  .work-grid, .work-grid--lead { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .work-grid--wall { grid-template-columns: repeat(3, 1fr); gap: 6px; }
-  /* An odd number of lead shots leaves a hole in the last row on a phone — let
-     the leftover photo run the full width instead, in the same 3:4 frame:
-     a wider crop threw away up to 58% of the taller phone photos. The contact
-     sheet is exempt: a giant tile in the middle of it would look broken. */
-  .work-grid:not(.work-grid--wall) > .work-item:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.alt-work-cat {
+  font-family: var(--mono); font-size: 0.66rem;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass-3);
 }
+.alt-work-job {
+  font-family: var(--display); font-weight: 600; font-size: 1.05rem;
+  line-height: 1.2; color: var(--ink);
+}
+.alt-work-item figure:hover { border-color: rgba(201, 162, 74, 0.45); box-shadow: 0 18px 40px -22px rgba(201, 162, 74, 0.45); }
+.alt-work-item figure:hover img { transform: scale(1.04); }
+@media (prefers-reduced-motion: reduce) {
+  .alt-work-item img { transition: none; }
+  .alt-work-item figure:hover img { transform: none; }
+}
+

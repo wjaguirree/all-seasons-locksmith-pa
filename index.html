@@ -522,7 +522,7 @@
   <link rel="preload" as="image" href="assets/img/hero-mobile.webp?v=20261021a" media="(max-width: 640px)" fetchpriority="high" />
   <link rel="preload" as="image" href="assets/img/hero.webp?v=20260906b" media="(min-width: 641px)" fetchpriority="high" />
   <link rel="stylesheet" href="styles.css?v=20260906b" />
-  <link rel="stylesheet" href="home.css?v=20261127h" />
+  <link rel="stylesheet" href="home.css?v=20261127i" />
 <!-- analytics:start -->
 <script>if(location.hostname==='allseasonslocksmith.com'){var g=document.createElement('script');g.async=true;g.src='https://www.googletagmanager.com/gtag/js?id=G-JRGPYGJLYK';document.head.appendChild(g);window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-JRGPYGJLYK');}</script>
 <script>(function(c,l,a,r,i){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};var s=0;function ld(){if(s)return;s=1;var t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;l.head.appendChild(t);}["scroll","pointerdown","keydown","touchstart"].forEach(function(e){addEventListener(e,ld,{once:true,passive:true})});setTimeout(ld,20000);})(window,document,"clarity","script","y1roxb7hwa");</script>
@@ -1268,33 +1268,5 @@
   <script defer src="lib/ScrollTrigger.min.js"></script>
   <script defer src="lib/manifest.js"></script>
   <script defer src="main.js?v=20261008a"></script>
-  <script>
-  /* Recent work: endless horizontal slider that slows on hover, click or tap pauses it.
-     Without JS, or with reduced motion, the row simply scrolls by hand. */
-  (function () {
-    var box = document.querySelector('[data-slider]');
-    if (!box || !box.animate || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var track = box.firstElementChild;
-    Array.prototype.slice.call(track.children).forEach(function (li) {
-      var copy = li.cloneNode(true);
-      copy.setAttribute('aria-hidden', 'true');
-      track.appendChild(copy);
-    });
-    box.classList.add('is-sliding');
-    var anim = track.animate(
-      [{ transform: 'translateX(0)' }, { transform: 'translateX(-50%)' }],
-      { duration: track.children.length / 2 * 4400, iterations: Infinity } /* same speed however many photos */
-    );
-    box.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') anim.updatePlaybackRate(0.3); });
-    box.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') anim.updatePlaybackRate(1); });
-    box.addEventListener('click', function () { if (anim.playState === 'paused') anim.play(); else anim.pause(); });
-    /* load every photo once the row is close, so none pop in while sliding */
-    if (window.IntersectionObserver) new IntersectionObserver(function (entries, io) {
-      if (!entries[0].isIntersecting) return;
-      track.querySelectorAll('img').forEach(function (img) { img.loading = 'eager'; });
-      io.disconnect();
-    }, { rootMargin: '600px 0px' }).observe(box);
-  })();
-  </script>
 </body>
 </html>
